@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F46F3A;
+  --pink: #D82E5D;
+  --white: #FFFFFF;
+  --black: #1a1a1a;
+  --light: #fff8f5;
+}
+body { font-family: 'Archivo', sans-serif; background: var(--light); color: var(--black); overflow-x: hidden; }
+ 
+/* ── PAGE SYSTEM ── */
+.page { display: none; }
+.page.active { display: block; }
+ 
+/* ── NAV ── */
+nav {
+  background: var(--white);
+  border-bottom: 3px solid var(--black);
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.nav-logo {
+  display: block;
+  height: 120px;
+  cursor: pointer;
+}
+.nav-logo span { color: var(--pink); }
+.nav-links { display: flex; gap: 0; }
+.nav-links a {
+  display: block;
+  padding: 0 18px;
+  height: 56px;
+  line-height: 56px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  border-left: 1.5px solid #e5e5e5;
+  transition: background .15s, color .15s;
+  cursor: pointer;
+}
+.nav-links a:hover { background: var(--orange); color: var(--white); }
+.nav-links a.nav-cta { background: var(--pink); color: var(--white); border-left: none; }
+.nav-links a.nav-cta:hover { background: #b5254e; }
+.nav-links a.nav-active { background: var(--orange); color: var(--white); }
+ 
+/* ── TICKER ── */
+.ticker {
+  background: var(--pink);
+  border-bottom: 2.5px solid var(--black);
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner { display: inline-flex; animation: tick 22s linear infinite; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: 0 28px;
+}
+.ticker-item::after { content: ' ★ '; color: var(--orange); }
+ 
+/* ── HERO ── */
+.hero {
+  background: var(--orange);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  height: calc(100vh - 95px);
+  min-height: 500px;
+  border-bottom: 3px solid var(--black);
+  position: relative;
+  overflow: hidden;
+}
+ 
+/* scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.scroll-hint-label {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.scroll-hint-arrow {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255,255,255,0.6);
+  position: relative; /* IMPORTANTE */
+  animation: bounce 1.8s ease-in-out infinite;
+}
+ 
+.scroll-hint-arrow::after {
+  content: '';
+  position: absolute; /* ESSENCIAL */
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid rgba(255,255,255,0.9);
+  border-bottom: 2px solid rgba(255,255,255,0.9);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+ 
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 340px; height: 340px;
+  background: var(--pink);
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  top: -80px; right: 280px;
+  opacity: 0.85;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  background: var(--pink);
+  border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+  bottom: -80px; left: 120px;
+  opacity: 0.7;
+}
+.hero-text {
+  padding: 52px 48px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 11vw, 180px);
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  text-shadow: 4px 4px 0 var(--black);
+}
+.hero-title .the { font-size: 0.45em; display: block; text-shadow: 4px 4px 0 var(--black); }
+.hero-sub {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  margin-top: 8px;
+  max-width: 360px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+.hero-cta { margin-top: 28px; display: flex; gap: 12px; align-items: center; }
+.btn-main {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 2.5px solid var(--black);
+  transition: background .15s, color .15s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-main:hover { background: var(--white); color: var(--black); }
+.btn-ghost {
+  display: inline-block;
+  background: transparent;
+  color: var(--white);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 2.5px solid var(--white);
+  transition: background .15s, color .15s;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: var(--white); color: var(--black); }
+.hero-cover {
+  background: var(--pink);
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 3px solid var(--black);
+  position: relative;
+  z-index: 2;
+  padding: 32px 24px;
+}
+.cover-card {
+  background: var(--white);
+  width: 100%;
+  padding: 28px 22px;
+  border: 2.5px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+}
+.cover-card-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+.cover-card-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; color: var(--black); }
+.cover-card-title { font-family: 'Archivo Black', sans-serif; font-size: 15px; line-height: 1.3; margin-top: 8px; }
+.cover-card-desc { font-size: 12px; color: #666; margin-top: 8px; line-height: 1.5; }
+.cover-card-btn {
+  display: block;
+  margin-top: 16px;
+  background: var(--orange);
+  color: var(--white);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px;
+  border: 2px solid var(--black);
+  cursor: pointer;
+  transition: background .15s;
+}
+.cover-card-btn:hover { background: var(--pink); }
+ 
+/* ── SECTION LABEL ── */
+.section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 32px 0;
+}
+.sec-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.05em;
+  position: relative;
+  padding-bottom: 6px;
+}
+.sec-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 3px;
+  background: var(--orange);
+}
+.sec-link {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink);
+  text-decoration: none;
+  cursor: pointer;
+}
+.sec-link:hover { color: var(--orange); }
+ 
+/* ── EDITIONS GRID (home) ── */
+.editions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 24px 32px 36px;
+}
+.ecard {
+  border: 2.5px solid var(--black);
+  background: var(--white);
+  box-shadow: 4px 4px 0 var(--black);
+  transition: transform .15s, box-shadow .15s;
+  cursor: pointer;
+  overflow: hidden;
+}
+.ecard:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+.ecard-top {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.ecard-top-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 110px;
+  opacity: 0.08;
+  color: var(--white);
+  position: absolute;
+  line-height: 1;
+}
+.ecard-top-text {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 16px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.ecard-stripe { height: 4px; }
+.ecard-body { padding: 16px 18px 20px; }
+.ecard-meta { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #999; margin-bottom: 6px; }
+.ecard-title { font-family: 'Archivo Black', sans-serif; font-size: 15px; line-height: 1.3; margin-bottom: 8px; }
+.ecard-excerpt { font-size: 13px; color: #666; line-height: 1.6; }
+.ecard-tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid;
+}
+ 
+/* ── MANIFESTO ── */
+.manifesto {
+  background: var(--black);
+  color: var(--white);
+  padding: 56px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 48px;
+  align-items: start;
+  border-top: 3px solid var(--orange);
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.manifesto::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: var(--orange);
+  border-radius: 50% 30% 60% 40% / 40% 60% 30% 60%;
+  right: -80px; top: -60px;
+  opacity: 0.15;
+}
+.manifesto-left { max-width: 200px; }
+.manifesto-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+.manifesto-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; letter-spacing: 0.02em; }
+.manifesto-title span { color: var(--pink); }
+.manifesto-body { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.75); }
+.manifesto-body p + p { margin-top: 14px; }
+.manifesto-body strong { color: var(--orange); font-weight: 700; }
+ 
+/* ── CATEGORIES (home) ── */
+.categories {
+  padding: 24px 32px 36px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.cat-card {
+  border: 2.5px solid var(--black);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  background: var(--white);
+}
+.cat-card:hover { background: var(--black); color: var(--white); }
+.cat-icon { font-size: 24px; }
+.cat-name { font-family: 'Archivo Black', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+.cat-count { font-size: 12px; color: #888; transition: color .15s; }
+.cat-card:hover .cat-count { color: #aaa; }
+ 
+/* ── SUBSCRIBE ── */
+.subscribe {
+  background: var(--orange);
+  border-top: 3px solid var(--black);
+  border-bottom: 3px solid var(--black);
+  padding: 48px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.subscribe::after {
+  content: '';
+  position: absolute;
+  width: 220px; height: 220px;
+  background: var(--pink);
+  border-radius: 40% 60%;
+  right: 380px; top: -60px;
+  opacity: 0.4;
+}
+.sub-left { position: relative; z-index: 1; }
+.sub-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+.sub-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1; color: var(--white); text-shadow: 3px 3px 0 var(--black); }
+.sub-form { display: flex; position: relative; z-index: 1; }
+.sub-form input {
+  padding: 14px 20px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  background: var(--white);
+  border: 2.5px solid var(--black);
+  border-right: none;
+  color: var(--black);
+  outline: none;
+  min-width: 280px;
+}
+.sub-form input::placeholder { color: #aaa; }
+.sub-form button {
+  padding: 14px 28px;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2.5px solid var(--black);
+  cursor: pointer;
+  transition: background .15s;
+}
+.sub-form button:hover { background: var(--pink); border-color: var(--pink); }
+ 
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo { 
+  display: block;
+  height: 120px; 
+  cursor: pointer; 
+}
+.footer-logo span { color: var(--pink); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; cursor: pointer; transition: color .15s; }
+.footer-links a:hover { color: var(--orange); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; }
+ 
+/* ══════════════════════════════════════
+   PAGE HEADERS (subpages)
+══════════════════════════════════════ */
+.page-header {
+  background: var(--orange);
+  padding: 52px 32px;
+  border-bottom: 3px solid var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  width: 280px; height: 280px;
+  background: var(--pink);
+  border-radius: 60% 40% 50% 50% / 40% 60% 50% 60%;
+  top: -80px; right: 60px;
+  opacity: 0.7;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  width: 180px; height: 180px;
+  background: var(--pink);
+  border-radius: 40% 60%;
+  bottom: -60px; left: 200px;
+  opacity: 0.5;
+}
+.page-header-inner { position: relative; z-index: 2; }
+.page-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.92;
+  color: var(--white);
+  text-shadow: 4px 4px 0 var(--black);
+  letter-spacing: 0.02em;
+}
+.page-desc { font-size: 14px; color: rgba(255,255,255,0.85); margin-top: 16px; max-width: 480px; line-height: 1.65; font-weight: 500; }
+ 
+/* ══════════════════════════════════════
+   EDIÇÕES PAGE
+══════════════════════════════════════ */
+.editions-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 64px;
+}
+.edition-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  border: 2.5px solid var(--black);
+  background: var(--white);
+  box-shadow: 4px 4px 0 var(--black);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+.edition-row:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+.edition-row-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.edition-row-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  color: var(--white);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.edition-row-ghost {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 110px;
+  color: rgba(255,255,255,0.08);
+  position: absolute;
+  line-height: 1;
+}
+.edition-row-label {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 4px;
+}
+.edition-row-body { padding: 22px 20px; display: flex; flex-direction: column; justify-content: center; border-left: 2.5px solid var(--black); }
+.edition-row-date { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #999; margin-bottom: 8px; }
+.edition-row-title { font-family: 'Archivo Black', sans-serif; font-size: 17px; line-height: 1.25; margin-bottom: 8px; }
+.edition-row-excerpt { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 12px; }
+.edition-row-footer { display: flex; align-items: center; justify-content: space-between; }
+.edition-row-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1.5px solid;
+}
+.edition-read {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+ 
+/* ── LEITOR INLINE ANIMADO ── */
+.edition-row.active-card {
+  border-color: var(--orange);
+  box-shadow: 4px 4px 0 var(--orange);
+}
+.edition-row.active-card .edition-read { color: var(--pink); }
+ 
+.inline-reader {
+  grid-column: 1 / -1;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.35s ease;
+}
+.inline-reader.open {
+  max-height: 9999px;
+  opacity: 1;
+}
+ 
+.inline-reader-inner {
+  border: 3px solid var(--black);
+  border-top: none;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-8px);
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.inline-reader.open .inline-reader-inner {
+  transform: translateY(0);
+}
+ 
+.inline-topbar {
+  background: var(--black);
+  border-bottom: 3px solid var(--orange);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 56px;
+  z-index: 50;
+}
+.inline-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.2);
+  padding: 7px 14px;
+  transition: all .15s;
+  background: transparent;
+  flex-shrink: 0;
+}
+.inline-back:hover { background: var(--pink); border-color: var(--pink); }
+.inline-back-arrow { transition: transform .2s; }
+.inline-back:hover .inline-back-arrow { transform: translateX(-4px); }
+ 
+.inline-meta { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.inline-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--orange); line-height: 1; flex-shrink: 0; }
+.inline-title { font-family: 'Archivo Black', sans-serif; font-size: 13px; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inline-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+.inline-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.inline-btn {
+  padding: 7px 12px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 2px solid rgba(255,255,255,0.22);
+  background: transparent; color: var(--white);
+  cursor: pointer; transition: all .15s;
+  text-decoration: none; display: inline-block; white-space: nowrap;
+}
+.inline-btn:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+.inline-btn.primary { background: var(--orange); border-color: var(--orange); }
+.inline-btn.primary:hover { background: var(--pink); border-color: var(--pink); }
+ 
+.inline-reader {
+  position: relative;
+  z-index: 100;
+}
+ 
+.inline-frame {
+  width: 100%;
+  height: 92vh;
+  background: #2a2a2a;
+  position: relative;
+  overflow: hidden;
+}
+.inline-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+ 
+/* ══════════════════════════════════════
+   SOBRE PAGE
+══════════════════════════════════════ */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 3px solid var(--black);
+}
+.sobre-main { padding: 48px 40px; border-right: 3px solid var(--black); }
+.sobre-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; margin-bottom: 24px; }
+.sobre-main-title span { color: var(--orange); }
+.sobre-text { font-size: 15px; line-height: 1.85; color: #444; }
+.sobre-text p + p { margin-top: 18px; }
+.sobre-text strong { color: var(--black); font-weight: 700; }
+.sobre-side { padding: 48px 32px; background: var(--light); }
+.sobre-side-block { margin-bottom: 32px; }
+.sobre-side-block:last-child { margin-bottom: 0; }
+.sobre-side-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+.sobre-side-title { font-family: 'Archivo Black', sans-serif; font-size: 16px; margin-bottom: 8px; }
+.sobre-side-text { font-size: 13px; color: #666; line-height: 1.65; }
+ 
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 3px solid var(--black);
+  border-bottom: 3px solid var(--black);
+}
+.value-item {
+  padding: 32px 28px;
+  border-right: 2.5px solid var(--black);
+}
+.value-item:last-child { border-right: none; }
+.value-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  color: var(--orange);
+}
+.value-name { font-family: 'Archivo Black', sans-serif; font-size: 15px; text-transform: uppercase; margin-bottom: 8px; }
+.value-desc { font-size: 13px; color: #666; line-height: 1.6; }
+ 
+.team-section { padding: 36px 32px 40px; }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+.team-card {
+  border: 2.5px solid var(--black);
+  background: var(--white);
+  box-shadow: 3px 3px 0 var(--black);
+  overflow: hidden;
+  text-align: center;
+}
+.team-card:nth-last-child(2) {
+  grid-column: 2;
+}
+.team-card:nth-last-child(1) {
+  grid-column: 3;
+}
+.team-avatar {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--white);
+  border-bottom: 2px solid var(--black);
+}
+.team-body { padding: 12px 10px; }
+.team-name { font-family: 'Archivo Black', sans-serif; font-size: 13px; }
+.team-role { font-size: 11px; color: #888; margin-top: 3px; }
+ 
+/* ─────────────────────────────
+   MOBILE FIX (sem alterar design)
+───────────────────────────── */
+@media (max-width: 768px) {
+ 
+  /* NAV */
+  nav {
+    padding: 0 16px;
+  }
+ 
+  .nav-links a {
+    padding: 0 10px;
+    font-size: 10px;
+  }
+ 
+  /* HERO */
+  .hero {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100svh;
+  }
+ 
+  .hero-cover {
+    width: 100%;
+    border-left: none;
+    border-top: 3px solid var(--black);
+  }
+ 
+  .hero-text {
+    padding: 32px 20px;
+  }
+ 
+  .hero-title {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+ 
+  /* GRIDS */
+  .editions-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+ 
+  .categories {
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+  }
+ 
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+ 
+  /* EDIÇÕES PAGE */
+  .editions-page-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+ 
+  .edition-row {
+    grid-template-columns: 1fr;
+  }
+ 
+  .edition-row-body {
+    border-left: none;
+    border-top: 2.5px solid var(--black);
+  }
+ 
+  /* SOBRE */
+  .sobre-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .sobre-main {
+    border-right: none;
+    border-bottom: 3px solid var(--black);
+  }
+ 
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  /* INSCRIÇÃO */
+  .inscricao-wrap {
+    grid-template-columns: 1fr;
+  }
+ 
+  .inscricao-right {
+    border-left: none;
+    border-top: 3px solid var(--black);
+  }
+  .inscricao-plans {
+    grid-template-columns: 1fr;
+  }
+  /* FORM */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  /* SUBSCRIBE */
+  .subscribe {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sub-form {
+    width: 100%;
+    flex-direction: column;
+  }
+  .sub-form input {
+    width: 100%;
+    border-right: 2.5px solid var(--black);
+    margin-bottom: 10px;
+  }
+  .sub-form button {
+    width: 100%;
+  }
+  /* FOOTER */
+  footer {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
+ 
+@media (max-width: 768px) {
+ 
+  .manifesto {
+    grid-template-columns: 1fr; /* vira coluna */
+    gap: 24px;
+  }
+ 
+  .manifesto-left {
+    max-width: 100%; /* remove limitação lateral */
+  }
+ 
+}
+ 
+</style>
+</head>
+<body>
+ 
+<!-- ── NAV ── -->
+<nav>
+  <img class="nav-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
+  <div class="nav-links">
+    <a id="nav-home" onclick="goTo('home')" class="nav-active">Home</a>
+    <a id="nav-edicoes" onclick="goTo('edicoes')">Edições</a>
+    <a id="nav-sobre" onclick="goTo('sobre')">Sobre</a>
+  </div>
+</nav>
+ 
+<!-- ══════════════════════════════════════
+     HOME
+══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">📰 Jornal Quinzenal · Vol. I · 2026</div>
+      <h1 class="hero-title"><span class="the">THE</span>MOODBOARD</h1>
+      <p class="hero-sub">Um jornal digital feito por jovens que acreditam no poder da palavra. Cultura, atualidades, opinião e entrevistas — com olhar crítico, autoral e criativo.</p>
+      <div class="hero-cta">
+        <button class="btn-main" onclick="irParaUltimaEdicao()">Ler última edição</button>
+        <button class="btn-ghost" onclick="goTo('edicoes')">Ver todas as edições</button>
+      </div>
+    </div>
+    <div class="hero-cover">
+      <div class="cover-card">
+        <div class="cover-card-tag">📰 Edição atual</div>
+        <div class="cover-card-num">01</div>
+        <div class="cover-card-title"></div>
+        <div class="cover-card-desc">5 matérias · ~20 min de leitura · 01 Abr 2026</div>
+        <div class="cover-card-btn" onclick="goTo('edicoes')">Ler agora →</div>
+      </div>
+    </div>
+    <div class="scroll-hint" onclick="document.getElementById('home-content').scrollIntoView({behavior:'smooth'})">
+      <span class="scroll-hint-label">Rolar</span>
+      <div class="scroll-hint-arrow"></div>
+    </div>
+  </section>
+ 
+  <div id="home-content" class="ticker reveal">
+    <div class="ticker-inner">
+      <span class="ticker-item">Cultura e Atualidades</span><span class="ticker-item">Publicações Quinzenais</span><span class="ticker-item">Opinião e Entrevistas</span><span class="ticker-item">The Moodboard 2026</span><span class="ticker-item">Jornalismo Jovem</span><span class="ticker-item">Cultura e Atualidades</span><span class="ticker-item">Publicações Quinzenais</span><span class="ticker-item">Opinião e Entrevistas</span><span class="ticker-item">The Moodboard 2026</span><span class="ticker-item">Jornalismo Jovem</span>
+    </div>
+  </div>
+ 
+  <div class="section-label reveal">
+    <div class="sec-title">Últimas Edições</div>
+    <a class="sec-link" onclick="goTo('edicoes')">Ver arquivo completo →</a>
+  </div>
+  <div class="editions-grid reveal">
+    <!-- <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:var(--pink)"><span class="ecard-top-num">03</span><span class="ecard-top-text">Corpo<br>& Cidade</span></div>
+      <div class="ecard-stripe" style="background:var(--orange)"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 03 · Fev 2026</div>
+        <div class="ecard-title">Como o espaço urbano molda quem somos</div>
+        <div class="ecard-excerpt">Uma jornada pelos lugares que habitamos e como eles nos transformam silenciosamente.</div>
+        <span class="ecard-tag" style="color:var(--pink);border-color:var(--pink)">Cultura</span>
+      </div>
+    </div>
+    <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:var(--orange)"><span class="ecard-top-num">02</span><span class="ecard-top-text">Nostalgia<br>Futura</span></div>
+      <div class="ecard-stripe" style="background:var(--pink)"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 02 · Jan 2026</div>
+        <div class="ecard-title">Saudade do que ainda não aconteceu</div>
+        <div class="ecard-excerpt">Sobre o estranho fenômeno de sentir falta de um tempo que nunca existiu.</div>
+        <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Opinião</span>
+      </div>
+    </div> -->
+    <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:#1a1a1a"><span class="ecard-top-num">01</span><span class="ecard-top-text" style="color:var(--orange)">Primeira<br>Edição</span></div>
+      <div class="ecard-stripe" style="background:var(--pink)"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 1 · 01 Abr 2026</div>
+        <div class="ecard-title">Luzes apagadas para 2026!</div>
+        <div class="ecard-excerpt">Conheça a primeira edição do jornal The MoodBoard!</div>
+        <span class="ecard-tag" style="color:var(--black);border-color:var(--black)">Manifesto</span>
+      </div>
+    </div>
+  </div>
+ 
+  <section class="manifesto reveal">
+    <div class="manifesto-left">
+      <div class="manifesto-tag">Quem somos</div>
+      <div class="manifesto-title">O QUE É O <span>THE</span> <span>MOOD</span>BOARD?</div>
+    </div>
+    <div class="manifesto-body">
+      <p>The Moodboard é um jornal digital colaborativo criado por <strong>jovens que acreditam no poder da palavra</strong> como forma de expressão, reflexão e transformação.</p>
+      <p>Com uma identidade vibrante e plural, o projeto reúne quinzenalmente conteúdos que transitam entre cultura, atualidades, opinião e entrevistas — sempre com olhar crítico, autoral e criativo.</p>
+      <p>A marca reflete exatamente isso: <strong>um espaço onde ideias se encontram como num quadro de referências</strong> — dinâmico, colorido, jovem.</p>
+    </div>
+  </section>
+ 
+  <section class="subscribe reveal">
+    <div class="sub-left">
+      <div class="sub-eyebrow">Não perca nenhuma edição</div>
+      <div class="sub-title"> PRÓXIMA<br>EDIÇÃO EM<br>
+        <span id="diasRestantesHome">--</span> DIAS.
+      </div>
+    </div>
+  </section>
+ 
+  <footer>
+    <img class="footer-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
+    <div class="footer-links">
+      <a onclick="goTo('home')">Home</a>      
+      <a onclick="goTo('edicoes')">Edições</a>
+      <a onclick="goTo('sobre')">Sobre</a>
+    </div>
+    <div class="footer-copy">© 2026 · Publicação quinzenal independente</div>
+  </footer>
+</div>
+ 
+<!-- ══════════════════════════════════════
+     EDIÇÕES
+══════════════════════════════════════ -->
+<div id="page-edicoes" class="page">
+ 
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-eyebrow">📰 Arquivo completo</div>
+      <div class="page-title">EDIÇÕES</div>
+      <div class="page-desc">Todas as edições do The Moodboard, do mais recente ao primeiro número. Clique em uma edição para ler direto aqui.</div>
+    </div>
+  </div>
+ 
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">Novas edições a cada 15 dias</span><span class="ticker-item">Cultura · Opinião · Entrevistas</span><span class="ticker-item">Jornalismo jovem e autoral</span><span class="ticker-item">Novas edições a cada 15 dias</span><span class="ticker-item">Cultura · Opinião · Entrevistas</span><span class="ticker-item">Jornalismo jovem e autoral</span>
+    </div>
+  </div>
+ 
+  <div class="editions-page-grid" id="edicoesGrid">
+ 
+    <!-- ✅ EDIÇÃO EXEMPLO                                                        -->
+    <!-- COMO ADICIONAR NOVAS EDIÇÕES:                                            -->
+    <!-- 1. Copie o bloco inteiro .edition-row (da linha abaixo até seu fechamento)-->
+    <!-- 2. Use um ID único para cada edição: edicao-1, edicao-2, etc             -->
+    <!-- 3. Forneça o acesso ao PDF de uma destes formas:                         -->
+    <!--    a) GOOGLE DRIVE: abrirEdicao(this,'ID_ARQUIVO_DRIVE','01','Título')   -->
+    <!--    b) URL DIRETA: abrirEdicao(this,'https://seusite.com/arquivo.pdf'...)-->
+    <!-- 4. Atualize: número (01), título, e metadados (data, textos, tempo)      -->
+    <!-- 5. Mude a cor de fundo: var(--pink), var(--orange), ou var(--black)      -->
+    <div id="edicao-1" class="edition-row" onclick="abrirEdicao(this,'1B2NbRZaBzS_0JeD_Qnt75r1ZOObKvVZx','01','Luzes apagadas para 2026!','Abril 2026 · 5 matérias · ~20 min')">
+      <div class="edition-row-visual" style="background:var(--pink)">
+        <span class="edition-row-ghost">1</span>
+        <div class="edition-row-num">01</div>
+        <div class="edition-row-label">Primeira edição</div>
+      </div>
+      <div class="edition-row-body">
+        <div class="edition-row-date">Abril 2026 · 5 matérias · ~20 min</div>
+        <div class="edition-row-title">Luzes apagadas para 2026!</div>
+        <div class="edition-row-excerpt">Conheça a primeira edição do The MoodBoard!</div>
+        <div class="edition-row-footer">
+          <span class="edition-row-tag" style="color:var(--pink);border-color:var(--pink)">Manifesto</span>
+          <span class="edition-read">Ler edição →</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- LEITOR INLINE — não remova este bloco -->
+    <div class="inline-reader" id="inlineReader">
+      <div class="inline-reader-inner">
+        <div class="inline-topbar">
+          <button class="inline-back" onclick="fecharLeitor()">
+            <span class="inline-back-arrow">←</span> Voltar
+          </button>
+          <div class="inline-meta">
+            <div class="inline-num" id="inlineNum">01</div>
+            <div>
+              <div class="inline-title" id="inlineTitle">Título</div>
+              <div class="inline-sub" id="inlineSub">Mês 2026</div>
+            </div>
+          </div>
+          <div class="inline-actions" id="inlineActions">
+            <a class="inline-btn primary" id="inlineDownload" href="#" target="_blank">⬇ Baixar PDF</a>
+ 
+          </div>
+        </div>
+        <div class="inline-frame">
+          <iframe id="inlineIframe" src="" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <section class="subscribe" style="margin-top:-3px;">
+    <div class="sub-left">
+      <div class="sub-eyebrow">Não perca nenhuma edição</div>
+      <div class="sub-title"> PRÓXIMA<br>EDIÇÃO EM<br>
+        <span id="diasRestantesEdicoes">--</span> DIAS.
+      </div>
+    </div>
+  </section>
+ 
+  <footer>
+    <img class="footer-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
+    <div class="footer-copy">© 2026 · Publicação quinzenal independente</div>
+  </footer>
+ 
+</div>
+
+<!-- ══════════════════════════════════════
+     SOBRE
+══════════════════════════════════════ -->
+<div id="page-sobre" class="page">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div class="page-eyebrow">🎤 Conheça o projeto</div>
+      <div class="page-title">SOBRE NÓS</div>
+      <div class="page-desc">The Moodboard nasceu da crença de que jovens têm muito a dizer — e que o jornalismo pode ser vibrante, autoral e transformador.</div>
+    </div>
+  </div>
+ 
+  <div class="sobre-grid">
+    <div class="sobre-main">
+      <div class="sobre-main-title">O <span>projeto</span></div>
+      <div class="sobre-text">
+        <p>The Moodboard é um <strong>jornal digital colaborativo</strong> criado por jovens que acreditam no poder da palavra como forma de expressão, reflexão e transformação.</p>
+        <p>Com uma identidade vibrante e plural, o projeto reúne quinzenalmente conteúdos que transitam entre cultura, atualidades, opinião e entrevistas — sempre com <strong>olhar crítico, autoral e criativo</strong>.</p>
+        <p>A marca reflete exatamente isso: um espaço onde ideias se encontram como num quadro de referências — dinâmico, colorido, jovem. Aqui, cada edição é uma nova composição de vozes, perspectivas e sentimentos.</p>
+        <p>Os ícones do jornal e do microfone traduzem visualmente o propósito do projeto: o jornal representa <strong>a escrita e a informação</strong>; o microfone, <strong>a escuta e a troca</strong> — elementos fundamentais do nosso jornalismo jovem e expressivo.</p>
+      </div>
+    </div>
+    <div class="sobre-side">
+      <div class="sobre-side-block">
+        <div class="sobre-side-label">Missão</div>
+        <div class="sobre-side-title">Dar voz à geração que está chegando</div>
+        <div class="sobre-side-text">Acreditamos que o jornalismo jovem tem potencial para transformar narrativas, questionar o status quo e construir novos mundos possíveis através das palavras.</div>
+      </div>
+      <div class="sobre-side-block">
+        <div class="sobre-side-label">Formato</div>
+        <div class="sobre-side-title">Quinzenal, digital e colaborativo</div>
+        <div class="sobre-side-text">Publicamos a cada 15 dias, com edições temáticas que reúnem múltiplas vozes em torno de um mesmo eixo de reflexão.</div>
+      </div>
+      <div class="sobre-side-block">
+        <div class="sobre-side-label">Contato</div>
+        <div class="sobre-side-title">Fale com a gente</div>
+        <div class="sobre-side-text">@themoodboardnews no Instagram</div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="values-grid">
+    <div class="value-item">
+      <div class="value-num">01</div>
+      <div class="value-name">Autoria</div>
+      <div class="value-desc">Cada texto tem uma voz única. Não publicamos conteúdo genérico — cada colaborador traz seu ponto de vista próprio.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-num">02</div>
+      <div class="value-name">Criticidade</div>
+      <div class="value-desc">Olhamos para o mundo com curiosidade e ceticismo saudável. Questionamos o óbvio e buscamos perspectivas que vão além do senso comum.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-num">03</div>
+      <div class="value-name">Criatividade</div>
+      <div class="value-desc">A forma importa tanto quanto o conteúdo. Experimentamos com linguagem, formato e estética para criar experiências de leitura memoráveis.</div>
+    </div>
+  </div>
+ 
+  <div class="team-section">
+    <div class="section-label" style="padding:0 0 0 0">
+      <div class="sec-title">Quem faz acontecer</div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">LI</div>
+        <div class="team-body">
+          <div class="team-name">LÍVIA</div>
+          <div class="team-role">Fundadora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">AL</div>
+        <div class="team-body">
+          <div class="team-name">ANA LUÍSA</div>
+          <div class="team-role">Fundadora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">CL</div>
+        <div class="team-body">
+          <div class="team-name">CLARISSA</div>
+          <div class="team-role">Administradora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">ID</div>
+        <div class="team-body">
+          <div class="team-name">ISA DOURADO</div>
+          <div class="team-role">Administradora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">BI</div>
+        <div class="team-body">
+          <div class="team-name">BIA</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">ED</div>
+        <div class="team-body">
+          <div class="team-name">EDUARDA</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">YA</div>
+        <div class="team-body">
+          <div class="team-name">YASMIN</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">AL</div>
+        <div class="team-body">
+          <div class="team-name">ANA LUIZA</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">MA</div>
+        <div class="team-body">
+          <div class="team-name">MALU</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">DA</div>
+        <div class="team-body">
+          <div class="team-name">DAVI</div>
+          <div class="team-role">Redator</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">MA</div>
+        <div class="team-body">
+          <div class="team-name">MARCELLE</div>
+          <div class="team-role">Redatora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">LU</div>
+        <div class="team-body">
+          <div class="team-name">LUCAS</div>
+          <div class="team-role">Pesquisador</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">SO</div>
+        <div class="team-body">
+          <div class="team-name">SOPHIA</div>
+          <div class="team-role">Pesquisadora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">BE</div>
+        <div class="team-body">
+          <div class="team-name">BECA</div>
+          <div class="team-role">Pesquisadora</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">SO</div>
+        <div class="team-body">
+          <div class="team-name">SOPHIA</div>
+          <div class="team-role">Redes Sociais</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--orange)">ES</div>
+        <div class="team-body">
+          <div class="team-name">ESTER</div>
+          <div class="team-role">Redes Sociais</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--pink)">LA</div>
+        <div class="team-body">
+          <div class="team-name">LAURA</div>
+          <div class="team-role">Redes Sociais</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:var(--black)">RC</div>
+        <div class="team-body">
+          <div class="team-name">RAFAEL COSTA</div>
+          <div class="team-role">Redes Sociais</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <footer>
+    <img class="footer-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
+    <div class="footer-copy">© 2026 · Publicação quinzenal independente</div>
+  </footer>
+</div>
+ 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function goTo(page) {
+  fecharLeitor();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
+  const navEl = document.getElementById('nav-' + page);
+  if (navEl) navEl.classList.add('nav-active');
+  window.scrollTo(0, 0);
+}
+ 
+function abrirEdicao(cardEl, pdfPath, num, titulo, meta) {
+  const reader = document.getElementById('inlineReader');
+  const grid   = document.getElementById('edicoesGrid');
+ 
+  document.querySelectorAll('.edition-row').forEach(r => r.classList.remove('active-card'));
+ 
+  const jaAberto = reader.classList.contains('open');
+  const mesmoCarta = cardEl.dataset.ativo === 'true';
+ 
+  if (jaAberto && mesmoCarta) {
+    fecharLeitor();
+    return;
+  }
+ 
+  document.querySelectorAll('.edition-row').forEach(r => r.dataset.ativo = 'false');
+  cardEl.dataset.ativo = 'true';
+  cardEl.classList.add('active-card');
+ 
+  const { previewUrl, downloadUrl } = getPdfUrls(pdfPath);
+ 
+  document.getElementById('inlineNum').textContent   = num;
+  document.getElementById('inlineTitle').textContent = titulo;
+  document.getElementById('inlineSub').textContent   = meta;
+  document.getElementById('inlineDownload').href     = downloadUrl;
+  document.getElementById('inlineIframe').src        = previewUrl;
+ 
+  grid.appendChild(reader);
+ 
+  if (!jaAberto) {
+    requestAnimationFrame(() => {
+      reader.classList.add('open');
+      setTimeout(() => {
+        reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    });
+  } else {
+    reader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+ 
+// Helper: gera URL de embed do Google Drive sem interface do Google
+function getPdfUrls(pdfInput) {
+  // Google Drive ID (qualquer tamanho entre 25-60 chars, sem barra)
+  const driveIdMatch = pdfInput.match(/[-\w]{25,60}/);
+  const looksLikeDriveId = driveIdMatch && !pdfInput.includes('/') && !pdfInput.includes('.');
+ 
+  // Extrai ID de URLs completas do Drive
+  const fromUrl = pdfInput.match(/\/d\/([-\w]{25,60})\//);
+  const driveId = fromUrl ? fromUrl[1] : (looksLikeDriveId ? pdfInput : null);
+ 
+  if (driveId) {
+    return {
+      // ?rm=minimal remove a barra do Google, embedded=true tira o header
+      previewUrl:  `https://drive.google.com/file/d/${driveId}/preview?rm=minimal`,
+      downloadUrl: `https://drive.google.com/uc?export=download&id=${driveId}`,
+    };
+  }
+ 
+  // Arquivo local ou URL direta — usa Google Docs Viewer como proxy
+  const encoded = encodeURIComponent(pdfInput.startsWith('http') ? pdfInput : window.location.href.replace(/\/[^/]*$/, '/') + pdfInput);
+  return {
+    previewUrl:  `https://docs.google.com/viewer?url=${encoded}&embedded=true`,
+    downloadUrl: pdfInput,
+  };
+}
+ 
+function fecharLeitor() {
+  const reader = document.getElementById('inlineReader');
+  if (!reader) return;
+  reader.classList.remove('open');
+  document.querySelectorAll('.edition-row').forEach(r => {
+    r.classList.remove('active-card');
+    r.dataset.ativo = 'false';
+  });
+  setTimeout(() => {
+    const iframe = document.getElementById('inlineIframe');
+    if (iframe) iframe.src = '';
+  }, 400);
+}
+ 
+// Scroll reveal observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+ 
+function initReveal() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+ 
+initReveal();
+ 
+function updateDays() {
+  const now = new Date();
+ 
+  const nextEdition = new Date("04/17/2026");
+ 
+  const diff = nextEdition - now;
+ 
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+ 
+  let texto;
+ 
+  if (days < 0) {
+    texto = "DISPONÍVEL";
+  } else if (days === 0) {
+    texto = "HOJE";
+  } else if (days === 1) {
+    texto = "1";
+  } else {
+    texto = days;
+  }
+ 
+  const home = document.getElementById("diasRestantesHome");
+  const edicoes = document.getElementById("diasRestantesEdicoes");
+ 
+  if (home) home.innerText = texto;
+  if (edicoes) edicoes.innerText = texto;
+}
+ 
+setInterval(updateDays, 1000 * 60 * 60);
+updateDays();
+
+function irParaUltimaEdicao() {
+  goTo('edicoes');
+}
+ 
+</script>
+</body>
+</html>
