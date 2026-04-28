@@ -531,22 +531,21 @@ footer {
    EDIÇÕES PAGE
 ══════════════════════════════════════ */
 .editions-page-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
-  padding: 64px;
+  padding: 40px 64px;
 }
 .edition-row {
-  display: grid;
-  grid-template-columns: 180px 1fr;
   border: 2.5px solid var(--black);
   background: var(--white);
   box-shadow: 4px 4px 0 var(--black);
   overflow: hidden;
-  cursor: pointer;
-  transition: transform .15s, box-shadow .15s;
+  transition: box-shadow .15s;
+  grid-column: 1 / -1;
 }
-.edition-row:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+.edition-row-header:hover .edition-row-body { background: var(--light); }
+.edition-row-header { cursor: pointer; }
 .edition-row-visual {
   display: flex;
   flex-direction: column;
@@ -778,6 +777,229 @@ footer {
 .team-name { font-family: 'Archivo Black', sans-serif; font-size: 13px; }
 .team-role { font-size: 11px; color: #888; margin-top: 3px; }
  
+/* ══════════════════════════════════════
+   MATÉRIAS (cards dentro de cada edição)
+══════════════════════════════════════ */
+.edition-row {
+  display: block; /* override grid para flex column */
+}
+.edition-row-header {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  overflow: hidden;
+  cursor: pointer;
+}
+.edition-row-header .edition-row-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.edition-row-header .edition-row-body {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 2.5px solid var(--black);
+}
+
+.materias-expand {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+  border-top: 0px solid var(--black);
+}
+.materias-expand.open {
+  max-height: 2000px;
+  border-top: 2.5px solid var(--black);
+}
+.materias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.materia-card {
+  border-right: 2px solid var(--black);
+  padding: 0 0 22px;
+  cursor: pointer;
+  transition: background .15s;
+  background: var(--white);
+  position: relative;
+}
+.materia-card:last-child { border-right: none; }
+.materia-card:hover { background: var(--light); }
+.materia-card-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 2px solid var(--black);
+}
+.materia-card-img-placeholder {
+  display: none;
+}
+.materia-card-body {
+  padding: 14px 20px 8px;
+}
+.materia-card-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.materia-card-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  color: var(--black);
+}
+.materia-card-excerpt {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+.materia-card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1.5px solid;
+  display: inline-block;
+}
+.materia-card-read {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  position: absolute;
+  bottom: 22px;
+  right: 20px;
+}
+.materias-footer {
+  border-top: 2px solid var(--black);
+  padding: 10px 20px;
+  background: var(--light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.materias-footer-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+}
+.materias-fechar {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pink);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Archivo', sans-serif;
+}
+.materias-fechar:hover { color: var(--orange); }
+
+/* ── LEITOR DE MATÉRIA ── */
+.materia-reader-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,26,0.92);
+  z-index: 500;
+  overflow-y: auto;
+}
+.materia-reader-overlay.open { display: block; }
+.materia-reader-box {
+  background: var(--white);
+  max-width: 760px;
+  margin: 48px auto;
+  border: 3px solid var(--black);
+  box-shadow: 8px 8px 0 var(--black);
+}
+.materia-reader-topbar {
+  background: var(--black);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid var(--orange);
+}
+.materia-reader-close {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  cursor: pointer;
+  background: none;
+  border: 2px solid rgba(255,255,255,0.2);
+  padding: 6px 14px;
+  transition: all .15s;
+}
+.materia-reader-close:hover { background: var(--pink); border-color: var(--pink); }
+.materia-reader-edicao {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.materia-reader-hero {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 3px solid var(--black);
+}
+.materia-reader-content {
+  padding: 36px 44px 48px;
+}
+.materia-reader-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.materia-reader-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  color: var(--black);
+}
+.materia-reader-meta {
+  font-size: 11px;
+  color: #999;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eee;
+}
+.materia-reader-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #333;
+}
+.materia-reader-body p + p { margin-top: 18px; }
+.materia-reader-body strong { color: var(--black); }
+
 /* ─────────────────────────────
    MOBILE FIX (sem alterar design)
 ───────────────────────────── */
@@ -932,7 +1154,7 @@ footer {
 <div id="page-home" class="page active">
   <section class="hero">
     <div class="hero-text">
-      <div class="hero-badge">📰 Jornal Quinzenal · Vol. I · 2026</div>
+      <div class="hero-badge">Jornal Quinzenal · Vol. I · 2026</div>
       <h1 class="hero-title"><span class="the">THE</span>MOODBOARD</h1>
       <p class="hero-sub">Um jornal digital feito por jovens que acreditam no poder da palavra. Cultura, atualidades, opinião e entrevistas — com olhar crítico, autoral e criativo.</p>
       <div class="hero-cta">
@@ -942,10 +1164,10 @@ footer {
     </div>
     <div class="hero-cover">
       <div class="cover-card">
-        <div class="cover-card-tag">📰 Edição atual</div>
-        <div class="cover-card-num">01</div>
-        <div class="cover-card-title"></div>
-        <div class="cover-card-desc">5 matérias · ~20 min de leitura · 01 Abr 2026</div>
+        <div class="cover-card-tag">Edição atual</div>
+        <div class="cover-card-num">02</div>
+        <div class="cover-card-title">Copa, Redes & Lolla</div>
+        <div class="cover-card-desc">5 matérias · ~30 min de leitura · Abr 2026</div>
         <div class="cover-card-btn" onclick="goTo('edicoes')">Ler agora →</div>
       </div>
     </div>
@@ -986,6 +1208,16 @@ footer {
         <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Opinião</span>
       </div>
     </div> -->
+    <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:var(--orange)"><span class="ecard-top-num">02</span><span class="ecard-top-text" style="color:#1a1a1a">Copa,<br>Redes & +</span></div>
+      <div class="ecard-stripe" style="background:var(--pink)"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 2 · Abr 2026</div>
+        <div class="ecard-title">Clima de Copa, Redes Sociais e Lollapalooza</div>
+        <div class="ecard-excerpt">Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lolla.</div>
+        <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Esportes · Cultura</span>
+      </div>
+    </div>
     <div class="ecard" onclick="goTo('edicoes')">
       <div class="ecard-top" style="background:#1a1a1a"><span class="ecard-top-num">01</span><span class="ecard-top-text" style="color:var(--orange)">Primeira<br>Edição</span></div>
       <div class="ecard-stripe" style="background:var(--pink)"></div>
@@ -1037,7 +1269,7 @@ footer {
  
   <div class="page-header">
     <div class="page-header-inner">
-      <div class="page-eyebrow">📰 Arquivo completo</div>
+      <div class="page-eyebrow">Arquivo completo</div>
       <div class="page-title">EDIÇÕES</div>
       <div class="page-desc">Todas as edições do The Moodboard, do mais recente ao primeiro número. Clique em uma edição para ler direto aqui.</div>
     </div>
@@ -1050,58 +1282,207 @@ footer {
   </div>
  
   <div class="editions-page-grid" id="edicoesGrid">
- 
-    <!-- ✅ EDIÇÃO EXEMPLO                                                        -->
-    <!-- COMO ADICIONAR NOVAS EDIÇÕES:                                            -->
-    <!-- 1. Copie o bloco inteiro .edition-row (da linha abaixo até seu fechamento)-->
-    <!-- 2. Use um ID único para cada edição: edicao-1, edicao-2, etc             -->
-    <!-- 3. Forneça o acesso ao PDF de uma destes formas:                         -->
-    <!--    a) GOOGLE DRIVE: abrirEdicao(this,'ID_ARQUIVO_DRIVE','01','Título')   -->
-    <!--    b) URL DIRETA: abrirEdicao(this,'https://seusite.com/arquivo.pdf'...)-->
-    <!-- 4. Atualize: número (01), título, e metadados (data, textos, tempo)      -->
-    <!-- 5. Mude a cor de fundo: var(--pink), var(--orange), ou var(--black)      -->
-    <div id="edicao-1" class="edition-row" onclick="abrirEdicao(this,'1B2NbRZaBzS_0JeD_Qnt75r1ZOObKvVZx','01','Luzes apagadas para 2026!','Abril 2026 · 5 matérias · ~20 min')">
-      <div class="edition-row-visual" style="background:var(--pink)">
-        <span class="edition-row-ghost">1</span>
-        <div class="edition-row-num">01</div>
-        <div class="edition-row-label">Primeira edição</div>
-      </div>
-      <div class="edition-row-body">
-        <div class="edition-row-date">Abril 2026 · 5 matérias · ~20 min</div>
-        <div class="edition-row-title">Luzes apagadas para 2026!</div>
-        <div class="edition-row-excerpt">Conheça a primeira edição do The MoodBoard!</div>
-        <div class="edition-row-footer">
-          <span class="edition-row-tag" style="color:var(--pink);border-color:var(--pink)">Manifesto</span>
-          <span class="edition-read">Ler edição →</span>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         COMO ADICIONAR NOVAS EDIÇÕES:
+         1. Copie um bloco .edition-row completo abaixo
+         2. Atualize: id="edicao-2", cor de fundo, número, título, metadados
+         3. Para cada matéria: atualize num, tag, tagColor, autor, titulo, texto
+         4. Adicione ou remova cards de matéria conforme necessário
+         ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- ── EDIÇÃO 01 ── -->
+    <div id="edicao-1" class="edition-row">
+      <div class="edition-row-header" onclick="toggleEdicao('edicao-1')">
+        <div class="edition-row-visual" style="background:var(--pink)">
+          <span class="edition-row-ghost">1</span>
+          <div class="edition-row-num">01</div>
+          <div class="edition-row-label">Primeira edição</div>
+        </div>
+        <div class="edition-row-body">
+          <div class="edition-row-date">Abril 2026 · 5 matérias · ~20 min</div>
+          <div class="edition-row-title">Luzes apagadas para 2026!</div>
+          <div class="edition-row-excerpt">Conheça a primeira edição do The MoodBoard!</div>
+          <div class="edition-row-footer">
+            <span class="edition-row-tag" style="color:var(--pink);border-color:var(--pink)">Manifesto</span>
+            <span class="edition-read">Ver matérias ↓</span>
+          </div>
         </div>
       </div>
-    </div>
- 
-    <!-- LEITOR INLINE — não remova este bloco -->
-    <div class="inline-reader" id="inlineReader">
-      <div class="inline-reader-inner">
-        <div class="inline-topbar">
-          <button class="inline-back" onclick="fecharLeitor()">
-            <span class="inline-back-arrow">←</span> Voltar
-          </button>
-          <div class="inline-meta">
-            <div class="inline-num" id="inlineNum">01</div>
-            <div>
-              <div class="inline-title" id="inlineTitle">Título</div>
-              <div class="inline-sub" id="inlineSub">Mês 2026</div>
+      <div class="materias-expand" id="materias-edicao-1">
+        <div class="materias-grid">
+
+          <div class="materia-card" onclick="abrirMateria('e01m01')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 01</div>
+              <div class="materia-card-title">Luzes apagadas para 2026!</div>
+              <div class="materia-card-excerpt">O manifesto inaugural do The MoodBoard e o que nos move.</div>
+              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Manifesto</span>
+              <span class="materia-card-read">Ler →</span>
             </div>
           </div>
-          <div class="inline-actions" id="inlineActions">
-            <a class="inline-btn primary" id="inlineDownload" href="#" target="_blank">⬇ Baixar PDF</a>
- 
+
+          <div class="materia-card" onclick="abrirMateria('e01m02')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 02</div>
+              <div class="materia-card-title">Título da Matéria 2</div>
+              <div class="materia-card-excerpt">Resumo breve da matéria 2 para o leitor ter uma prévia do conteúdo.</div>
+              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Cultura</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
           </div>
+
+          <div class="materia-card" onclick="abrirMateria('e01m03')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 03</div>
+              <div class="materia-card-title">Título da Matéria 3</div>
+              <div class="materia-card-excerpt">Resumo breve da matéria 3 para o leitor ter uma prévia do conteúdo.</div>
+              <span class="materia-card-tag" style="color:var(--black);border-color:var(--black)">Opinião</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <div class="materia-card" onclick="abrirMateria('e01m04')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 04</div>
+              <div class="materia-card-title">Título da Matéria 4</div>
+              <div class="materia-card-excerpt">Resumo breve da matéria 4 para o leitor ter uma prévia do conteúdo.</div>
+              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Entrevista</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <div class="materia-card" onclick="abrirMateria('e01m05')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 05</div>
+              <div class="materia-card-title">Título da Matéria 5</div>
+              <div class="materia-card-excerpt">Resumo breve da matéria 5 para o leitor ter uma prévia do conteúdo.</div>
+              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Atualidades</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
         </div>
-        <div class="inline-frame">
-          <iframe id="inlineIframe" src="" allowfullscreen></iframe>
+        <div class="materias-footer">
+          <span class="materias-footer-label">5 matérias · Edição 01</span>
+          <button class="materias-fechar" onclick="toggleEdicao('edicao-1')">↑ Fechar</button>
         </div>
       </div>
     </div>
- 
+
+    <!-- ── EDIÇÃO 02 ── -->
+    <div id="edicao-2" class="edition-row">
+      <div class="edition-row-header" onclick="toggleEdicao('edicao-2')">
+        <div class="edition-row-visual" style="background:var(--orange)">
+          <span class="edition-row-ghost">2</span>
+          <div class="edition-row-num">02</div>
+          <div class="edition-row-label">Segunda edição</div>
+        </div>
+        <div class="edition-row-body">
+          <div class="edition-row-date">Abril 2026 · 5 matérias · ~30 min</div>
+          <div class="edition-row-title">Clima de Copa, Redes Sociais e Lollapalooza</div>
+          <div class="edition-row-excerpt">Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lollapalooza Brasil.</div>
+          <div class="edition-row-footer">
+            <span class="edition-row-tag" style="color:var(--orange);border-color:var(--orange)">Esportes · Cultura · Conselhos</span>
+            <span class="edition-read">Ver matérias ↓</span>
+          </div>
+        </div>
+      </div>
+      <div class="materias-expand" id="materias-edicao-2">
+        <div class="materias-grid">
+
+          <!-- MATÉRIA 1 -->
+          <div class="materia-card" onclick="abrirMateria('e02m01')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 01</div>
+              <div class="materia-card-title">Clima de copa no ar?</div>
+              <div class="materia-card-excerpt">Copa do Mundo 2026: hexa, eliminatórias e o futuro da seleção brasileira.</div>
+              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Esportes</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <!-- MATÉRIA 2 -->
+          <div class="materia-card" onclick="abrirMateria('e02m02')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 02</div>
+              <div class="materia-card-title">Como estudar fora? Por onde começar em 2026?</div>
+              <div class="materia-card-excerpt">Um guia completo de 9 passos para quem quer estudar no exterior.</div>
+              <span class="materia-card-tag" style="color:var(--black);border-color:var(--black)">Estudos</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <!-- MATÉRIA 3 -->
+          <div class="materia-card" onclick="abrirMateria('e02m03')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 03</div>
+              <div class="materia-card-title">Como parar de se comparar nas redes sociais</div>
+              <div class="materia-card-excerpt">FOMO, dopamina digital e conselhos de irmã mais velha para se libertar da comparação.</div>
+              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Conselhos</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <!-- MATÉRIA 4 -->
+          <div class="materia-card" onclick="abrirMateria('e02m04')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 04</div>
+              <div class="materia-card-title">Mood Literário</div>
+              <div class="materia-card-excerpt">7 indicações de livros — fantasia, romance, mistério e existencialismo — com feedback das redatoras.</div>
+              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Cultura</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+          <!-- MATÉRIA 5 -->
+          <div class="materia-card" onclick="abrirMateria('e02m05')">
+            <div class="materia-card-img-placeholder"></div>
+            <div class="materia-card-body">
+              <div class="materia-card-num">Matéria 05</div>
+              <div class="materia-card-title">Lollapalooza 2026: mais do que um festival</div>
+              <div class="materia-card-excerpt">Como o Lolla se tornou um espaço estratégico de consumo e cultura para a Geração Z.</div>
+              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Cultura</span>
+              <span class="materia-card-read">Ler →</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="materias-footer">
+          <span class="materias-footer-label">5 matérias · Edição 02</span>
+          <button class="materias-fechar" onclick="toggleEdicao('edicao-2')">↑ Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ AQUI VIRÃO AS PRÓXIMAS EDIÇÕES (copie o bloco acima) ══ -->
+
+  </div>
+
+  <!-- LEITOR DE MATÉRIA (overlay) -->
+  <div class="materia-reader-overlay" id="materiaReaderOverlay" onclick="fecharMateria(event)">
+    <div class="materia-reader-box">
+      <div class="materia-reader-topbar">
+        <span class="materia-reader-edicao" id="materiaEdicao">Edição 01</span>
+        <button class="materia-reader-close" onclick="fecharMateria()">Fechar</button>
+      </div>
+      <img class="materia-reader-hero" id="materiaHeroImg" src="" alt="" style="display:none">
+      <div class="materia-reader-content">
+        <div class="materia-reader-tag" id="materiaTag">Categoria</div>
+        <div class="materia-reader-title" id="materiaTitle">Título</div>
+        <div class="materia-reader-meta" id="materiaMeta">Autor · Edição</div>
+        <div class="materia-reader-body" id="materiaBody"></div>
+      </div>
+    </div>
   </div>
  
   <section class="subscribe" style="margin-top:-3px;">
@@ -1126,7 +1507,7 @@ footer {
 <div id="page-sobre" class="page">
   <div class="page-header">
     <div class="page-header-inner">
-      <div class="page-eyebrow">🎤 Conheça o projeto</div>
+      <div class="page-eyebrow">Conheça o projeto</div>
       <div class="page-title">SOBRE NÓS</div>
       <div class="page-desc">The Moodboard nasceu da crença de que jovens têm muito a dizer — e que o jornalismo pode ser vibrante, autoral e transformador.</div>
     </div>
@@ -1320,6 +1701,63 @@ footer {
 </div>
  
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleEdicao(id) {
+  const materias = document.getElementById('materias-' + id);
+  const row = document.getElementById(id);
+  const isOpen = materias.classList.contains('open');
+  // Fecha todas
+  document.querySelectorAll('.materias-expand').forEach(m => m.classList.remove('open'));
+  document.querySelectorAll('.edition-row').forEach(r => r.classList.remove('active-card'));
+  if (!isOpen) {
+    materias.classList.add('open');
+    row.classList.add('active-card');
+    setTimeout(() => {
+      materias.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
+const MATERIAS = {
+  'e01m01': {edicao:'Edição 01 · Abril 2026',num:'Matéria 01',tag:'Manifesto',tagColor:'var(--pink)',autor:'Redação The MoodBoard',titulo:'Luzes apagadas para 2026!',imagem:'',texto:'<p>Bem-vindo à primeira edição do The MoodBoard! Este é um espaço criado por jovens que acreditam no poder da palavra.</p><p>Aqui você vai encontrar cultura, atualidades, opinião e entrevistas — sempre com olhar crítico, autoral e criativo.</p><p>Obrigada por fazer parte desse começo. Que a luz do jornalismo jovem ilumine 2026.</p>'},
+  'e01m02': {edicao:'Edição 01 · Abril 2026',num:'Matéria 02',tag:'Cultura',tagColor:'var(--orange)',autor:'Redação The MoodBoard',titulo:'Título da Matéria 2',imagem:'',texto:'<p>Substitua este texto pelo conteúdo real da matéria 2.</p><p>Adicione quantos parágrafos precisar para contar a história completa.</p>'},
+  'e01m03': {edicao:'Edição 01 · Abril 2026',num:'Matéria 03',tag:'Opinião',tagColor:'var(--black)',autor:'Redação The MoodBoard',titulo:'Título da Matéria 3',imagem:'',texto:'<p>Substitua este texto pelo conteúdo real da matéria 3.</p><p>Adicione quantos parágrafos precisar para contar a história completa.</p>'},
+  'e01m04': {edicao:'Edição 01 · Abril 2026',num:'Matéria 04',tag:'Entrevista',tagColor:'var(--pink)',autor:'Redação The MoodBoard',titulo:'Título da Matéria 4',imagem:'',texto:'<p>Substitua este texto pelo conteúdo real da matéria 4.</p><p>Adicione quantos parágrafos precisar para contar a história completa.</p>'},
+  'e01m05': {edicao:'Edição 01 · Abril 2026',num:'Matéria 05',tag:'Atualidades',tagColor:'var(--orange)',autor:'Redação The MoodBoard',titulo:'Título da Matéria 5',imagem:'',texto:'<p>Substitua este texto pelo conteúdo real da matéria 5.</p><p>Adicione quantos parágrafos precisar para contar a história completa.</p>'},
+  'e02m01': {edicao:'Edição 02 · Abril 2026',num:'Matéria 01',tag:'Esportes',tagColor:'var(--orange)',autor:'Yasmim Calcinoni Vieira · Lucas Silva Duffrayer',titulo:'Clima de copa no ar?',imagem:'',texto:'<p>A Copa do Mundo da FIFA 2026, que será realizada no México, Estados Unidos e Canadá, já mobiliza os torcedores com as eliminatórias e impulsiona investimentos em infraestrutura, com obras de modernização para a primeira edição do torneio com 48 seleções.</p><p>Nem todas as pessoas são amantes de futebol, porém, a Copa mobiliza e comove o coração da população há muito tempo — isso vai além do esporte. A competição teve início em 1930, no Uruguai, onde o país celebrava os 100 anos da sua primeira constituição e o mundo passava pela crise da quebra da bolsa de Nova York.</p><p>Ao passar dos anos, a competição foi crescendo. A FIFA é responsável por elaborar as regras, decidir o país-sede, as datas e supervisionar toda a organização do evento. A competição contará com 48 participantes, ante as 32 seleções de 2022.</p><p>O Brasil ficou em 5º lugar no ranking após as partidas contra a França (derrota de 2x1) e a revanche histórica contra a Croácia, com virada de 3x1. Esse jogo foi essencial para manter a esperança no hexa, com destaque para a entrada de Endrick no final do tempo.</p><p>No dia 18 de maio de 2026, sob o comando de Carlos Ancelotti, serão chamados 26 atletas. O torneio começa em 11 de junho de 2026 com a partida de abertura no Estádio Azteca, na Cidade do México, e vai até a grande final em 19 de julho de 2026.</p><p>Ansiosos? Com o pequeno afastamento do Neymar da seleção, precisamos de um craque para desenvolver a esperança no coração dos torcedores. Quem será esse jogador?</p>'},
+  'e02m02': {edicao:'Edição 02 · Abril 2026',num:'Matéria 02',tag:'Estudos',tagColor:'var(--black)',autor:'Eduarda Carmo · Sophia Xavier',titulo:'Como estudar fora? Por onde começar em 2026?',imagem:'',texto:'<p>Já pensou em ter uma passagem só de ida em um aeroporto? Sair da sua rotina, da sua casa, da sua escola, ir para longe de tudo aquilo que você conhece para algo completamente novo! Para muitos jovens isso deixou de ser apenas um sonho e se tornou um plano real.</p><p><strong>Primeiro passo: Definir seus objetivos.</strong><br>Por que você deseja estudar fora? O que você está disposto a sacrificar da sua zona de conforto? Você precisa entender o que quer: uma graduação, intercâmbio de curta duração, pós-graduação ou curso de idiomas?</p><p><strong>Segundo passo: O destino dos sonhos.</strong><br>Não dá para escolher um país só porque ele é bonitinho. Você precisa ter clareza sobre o custo de vida, segurança, idioma, adaptação e mercado de trabalho. Entre os países mais escolhidos por brasileiros estão: EUA, Canadá, Portugal, Reino Unido e Austrália.</p><p><strong>Terceiro passo: Instituições e requisitos.</strong><br>VÁ ATRÁS DAS FACULDADES QUE DÃO BOLSAS 100% OU FULL RIDE. Dólar, euro e libra não estão baratos! Faça uma College List com universidades de interesse, requisitos e prazos. O processo costuma exigir histórico escolar, extracurriculares, cartas de recomendação, essays e provas de proficiência como DET ou TOEFL.</p><p><strong>Quarto passo: Planejamento financeiro.</strong><br>Existem bolsas Full Ride (mensalidade + custos), bolsas completas, parciais, por necessidade financeira, por mérito acadêmico e por habilidades específicas. Pesquise todas as opções disponíveis.</p><p><strong>Quinto passo: Documentos.</strong><br>Atenção redobrada: passaporte válido, visto de estudante, comprovação financeira, histórico escolar traduzido, certificados de proficiência e cartas de recomendação traduzidas. Documentos errados podem derrubar sua aplicação.</p><p><strong>Sexto passo: Preparação emocional.</strong><br>Você estará em um país diferente, só, com pessoas que falam línguas e têm hábitos diferentes. A adaptação será solitária. Não se sinta culpado por seguir o SEU sonho.</p><p><strong>Sétimo ao Nono passo:</strong> Comece o quanto antes. Siga a linha do tempo: 1 a 2 anos antes defina objetivos; 6 a 12 meses antes faça as aplicações; 3 a 6 meses organize documentos e passagens. Isso é um sonho possível!</p>'},
+  'e02m03': {edicao:'Edição 02 · Abril 2026',num:'Matéria 03',tag:'Conselhos',tagColor:'var(--pink)',autor:'Marcelle Potenza Fontes · Sophia Girio',titulo:'Como parar de se comparar com a vida dos outros nas redes sociais',imagem:'',texto:'<p>Desde o tempo em que o ser humano soube o que é seu próprio reflexo, a comparação começou a acontecer. Nos dias de hoje, com o surgimento das redes sociais, esse fator se agrava, pois veio destacar a valorização da imagem e a necessidade de expor constantemente a "pessoa perfeita".</p><p>Quando você para por um tempo para olhar suas redes sociais e vê como a vida daquela pessoa parece muito mais fácil e melhor que a sua… bem-vinda ao clube. Mas deixa eu te contar uma coisa, como uma irmã mais velha contaria: isso não é a realidade!</p><p>Comparar faz parte do ser humano — sempre fez. Isso é o que diz a Teoria da Comparação Social de Leon Festinger. O problema não é a comparação em si, é <em>onde</em> você está se comparando. Hoje, você não se compara somente com pessoas reais, mas com versões editadas e mascaradas da realidade.</p><p>Dados do Pew Research Center (2022) mostram que 95% dos adolescentes usam YouTube, 67% TikTok e cerca de 60% Instagram e Snapchat. O Instituto Cactus (2024) aponta que 45% dos jovens brasileiros apresentam ansiedade relacionada ao uso dessas plataformas.</p><p><strong>FOMO</strong> (Fear Of Missing Out) é o medo de estar perdendo algo. Esse sentimento, somado à comparação constante, vai aos poucos desgastando a forma como você se enxerga.</p><p>A verdade é que você não precisa parar de se comparar completamente — isso nem é realista. O segredo está em <strong>mudar a forma como você reage a isso</strong>. Em vez de pensar que nunca será de tal jeito, pense: como ela pode ser minha inspiração para me tornar minha melhor versão?</p><p>Cada trajetória é única. Cada um tem seu próprio tempo. A sua vida não está atrasada. Ela não está menos interessante. Ela só não está sendo exibida em formato de destaque. E ainda bem — porque a vida real, com erros, fases e imperfeições, é muito mais profunda do que qualquer feed.</p>'},
+  'e02m04': {edicao:'Edição 02 · Abril 2026',num:'Matéria 04',tag:'Cultura',tagColor:'var(--orange)',autor:'Redação The MoodBoard',titulo:'Mood Literário',imagem:'',texto:'<p>Nesta edição trazemos indicações literárias para todos os gostos, com sinopses e o feedback das nossas redatoras.</p><p><strong>Fantasia | Percy Jackson e o Ladrão de Raios</strong> — Rick Riordan (2005) | 13–15 anos<br>Percy Jackson é um garoto que sempre teve dificuldades na escola. Sua vida muda quando ele descobre que pertence a um mundo muito maior do que imaginava. <em>Feedback: Envolvente e muito acessível, perfeito para quem está começando a ler fantasia.</em></p><p><strong>Fantasia | Six of Crows: Sangue e Mentiras</strong> — Leigh Bardugo (2015) | 16–18 anos<br>Um grupo de seis jovens com habilidades específicas é reunido para executar um plano extremamente arriscado em Ketterdam, cidade marcada por crime. <em>Feedback: Destaca-se pela profundidade dos personagens. A narrativa é estratégica e intensa.</em></p><p><strong>Romance | Para Todos os Garotos que Já Amei</strong> — Jenny Han (2014) | 13–15 anos<br>Lara Jean escreve cartas para todos os garotos por quem já se apaixonou, sem a intenção de enviá-las. Tudo muda quando essas cartas são entregues misteriosamente. <em>Feedback: Narrativa leve, envolvente e muito sensível.</em></p><p><strong>Romance | Vermelho, Branco e Sangue Azul</strong> — Casey McQuiston (2019) | 16–18 anos<br>O filho da presidente dos EUA e o príncipe da Inglaterra precisam fingir uma amizade para evitar conflitos diplomáticos. <em>Feedback: Combina romance e política de forma envolvente, com importante representatividade.</em></p><p><strong>Mistério | Manual de Assassinato para Boas Garotas</strong> — Holly Jackson (2019) | 13–15 anos<br>Um caso de assassinato aparentemente resolvido é investigado anos depois por uma estudante determinada. <em>Feedback: Um dos thrillers jovens mais populares dos últimos anos.</em></p><p><strong>Existencialismo | O Pequeno Príncipe</strong> — Antoine de Saint-Exupéry (1943) | 13–15 anos<br>Um piloto perdido no deserto encontra um menino vindo de outro planeta, que compartilha reflexões sobre a vida. <em>Feedback: Apesar da simplicidade, traz reflexões profundas. Muda de significado conforme a maturidade do leitor.</em></p><p><strong>Existencialismo | A Metamorfose</strong> — Franz Kafka (1915) | 16–18 anos<br>Um homem acorda transformado em um inseto e a narrativa acompanha as consequências dessa mudança. <em>Feedback: Leitura intensa e reflexiva, abordando identidade e isolamento de forma profunda.</em></p>'},
+  'e02m05': {edicao:'Edição 02 · Abril 2026',num:'Matéria 05',tag:'Cultura',tagColor:'var(--pink)',autor:'Redação The MoodBoard',titulo:'Lollapalooza 2026 no Brasil: Mais do que um festival, uma experiência de consumo',imagem:'',texto:'<p>A edição de 2026 do Lollapalooza ocorreu entre os dias 20 a 22 de março em São Paulo, no Autódromo de Interlagos. Um dos maiores eventos de música do mundo e como ele afeta o público jovem em seu consumo.</p><p>O Lollapalooza é um festival anual que reúne diversos gêneros musicais. Seu nome significa algo extraordinário ou fora do comum. Foi criado em 1991, nos Estados Unidos, por Perry Farrell, vocalista da banda Jane\'s Addiction. A primeira edição no Brasil foi em 2012, no Jockey Club de São Paulo, reunindo cerca de 140 mil pessoas.</p><p>Muito além dos shows, o festival oferece uma experiência completa: palcos, roda-gigante, áreas de descanso, painéis para fotos, praça de alimentação e estandes de marcas com ativações interativas. Essa imersão transforma o festival em um produto cultural e de consumo, onde entretenimento e marcas se conectam.</p><p>Marcas como Sadia, Quem disse Berenice?, O Boticário e Riachuelo investiram em experiências personalizadas. A Flying Fish distribuiu minicâmeras fotográficas para os participantes. A Cielo ofereceu pagamentos cashless, tornando o consumo mais prático.</p><p>Em 2026, com 86% da audiência tendo até 34 anos, a curadoria priorizou artistas populares nas redes sociais. A line-up contou com Sabrina Carpenter, Tyler the Creator, Chappell Roan, Deftones, Lorde, Skrillex, KATSEYE e Addison Rae, entre outros.</p><p>Mais do que seguir tendências, o Lollapalooza ajuda a defini-las, estabelecendo o line-up como termômetro do que está em alta na cultura digital. O festival se consolida como muito mais do que um evento musical: é um espaço estratégico de consumo voltado à Geração Z, onde marcas não vendem apenas produtos, mas experiências e conexões.</p>'},
+};
+
+function abrirMateria(id) {
+  const m = MATERIAS[id];
+  if (!m) return;
+  document.getElementById('materiaEdicao').textContent = m.edicao;
+  document.getElementById('materiaTag').textContent = m.tag;
+  document.getElementById('materiaTag').style.color = m.tagColor;
+  document.getElementById('materiaTitle').textContent = m.titulo;
+  document.getElementById('materiaMeta').textContent = m.autor + ' · ' + m.edicao;
+  document.getElementById('materiaBody').innerHTML = m.texto;
+  const hero = document.getElementById('materiaHeroImg');
+  if (m.imagem) {
+    hero.src = m.imagem;
+    hero.alt = m.titulo;
+    hero.style.display = 'block';
+  } else {
+    hero.style.display = 'none';
+    hero.src = '';
+  }
+  document.getElementById('materiaReaderOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharMateria(event) {
+  if (event && event.target !== document.getElementById('materiaReaderOverlay')) return;
+  document.getElementById('materiaReaderOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 function goTo(page) {
   fecharLeitor();
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
