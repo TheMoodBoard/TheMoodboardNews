@@ -361,7 +361,103 @@ nav {
   border: 1.5px solid;
 }
  
-/* ── MANIFESTO ── */
+/* ── PDF EDITION CARD ── */
+.pdf-card-wrapper {
+  padding: 24px 28px 8px;
+}
+.pdf-edition-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border: 2.5px solid var(--black);
+  background: var(--white);
+  box-shadow: 5px 5px 0 var(--black);
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  overflow: hidden;
+}
+.pdf-edition-card:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--black); }
+.pdf-card-visual {
+  background: var(--pink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pdf-card-ghost {
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.pdf-card-icon { position: relative; z-index: 1; }
+.pdf-card-label {
+  position: relative;
+  z-index: 1;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-align: center;
+}
+.pdf-card-body {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pdf-card-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+.pdf-card-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.pdf-card-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.pdf-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pdf-card-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid;
+}
+.pdf-card-read {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+
 .manifesto {
   background: var(--black);
   color: var(--white);
@@ -1162,13 +1258,13 @@ footer {
         <button class="btn-ghost" onclick="goTo('edicoes')">Ver todas as edições</button>
       </div>
     </div>
-    <div class="hero-cover">
+    <div class="hero-cover" style="background:#C0392B">
       <div class="cover-card">
         <div class="cover-card-tag">Edição atual</div>
-        <div class="cover-card-num">03</div>
-        <div class="cover-card-title">TikTok, Moda & Identidade</div>
-        <div class="cover-card-desc">3 matérias · ~30 min de leitura · Mai 2026</div>
-        <div class="cover-card-btn" onclick="goTo('edicoes')">Ler agora →</div>
+        <div class="cover-card-num">04</div>
+        <div class="cover-card-title">Dias dos namorados</div>
+        <div class="cover-card-desc">4 matérias · ~25 min de leitura · Jun 2026</div>
+        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#C0392B">Ler agora →</div>
       </div>
     </div>
     <div class="scroll-hint" onclick="document.getElementById('home-content').scrollIntoView({behavior:'smooth'})">
@@ -1188,26 +1284,16 @@ footer {
     <a class="sec-link" onclick="goTo('edicoes')">Ver arquivo completo →</a>
   </div>
   <div class="editions-grid reveal">
-    <!-- <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:var(--pink)"><span class="ecard-top-num">03</span><span class="ecard-top-text">Corpo<br>& Cidade</span></div>
-      <div class="ecard-stripe" style="background:var(--orange)"></div>
+    <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:#C0392B"><span class="ecard-top-num">04</span><span class="ecard-top-text">Dias dos<br>Namorados</span></div>
+      <div class="ecard-stripe" style="background:#C0392B"></div>
       <div class="ecard-body">
-        <div class="ecard-meta">Nº 03 · Fev 2026</div>
-        <div class="ecard-title">Como o espaço urbano molda quem somos</div>
-        <div class="ecard-excerpt">Uma jornada pelos lugares que habitamos e como eles nos transformam silenciosamente.</div>
-        <span class="ecard-tag" style="color:var(--pink);border-color:var(--pink)">Cultura</span>
+        <div class="ecard-meta">Nº 4 · Jun 2026</div>
+        <div class="ecard-title">Dias dos namorados</div>
+        <div class="ecard-excerpt">Manual de sobrevivência do amor moderno.</div>
+        <span class="ecard-tag" style="color:#C0392B;border-color:#C0392B">Especial</span>
       </div>
     </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:var(--orange)"><span class="ecard-top-num">02</span><span class="ecard-top-text">Nostalgia<br>Futura</span></div>
-      <div class="ecard-stripe" style="background:var(--pink)"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 02 · Jan 2026</div>
-        <div class="ecard-title">Saudade do que ainda não aconteceu</div>
-        <div class="ecard-excerpt">Sobre o estranho fenômeno de sentir falta de um tempo que nunca existiu.</div>
-        <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Opinião</span>
-      </div>
-    </div> -->
     <div class="ecard" onclick="goTo('edicoes')">
       <div class="ecard-top" style="background:var(--pink)"><span class="ecard-top-num">03</span><span class="ecard-top-text">TikTok<br>& Moda</span></div>
       <div class="ecard-stripe" style="background:var(--orange)"></div>
@@ -1226,16 +1312,6 @@ footer {
         <div class="ecard-title">Clima de Copa, Redes Sociais e Lollapalooza</div>
         <div class="ecard-excerpt">Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lolla.</div>
         <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Esportes · Cultura</span>
-      </div>
-    </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:#1a1a1a"><span class="ecard-top-num">01</span><span class="ecard-top-text" style="color:var(--orange)">Primeira<br>Edição</span></div>
-      <div class="ecard-stripe" style="background:var(--pink)"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 1 · 01 Abr 2026</div>
-        <div class="ecard-title">Luzes apagadas para 2026!</div>
-        <div class="ecard-excerpt">Conheça a primeira edição do jornal The MoodBoard!</div>
-        <span class="ecard-tag" style="color:var(--black);border-color:var(--black)">Manifesto</span>
       </div>
     </div>
   </div>
@@ -1320,66 +1396,34 @@ footer {
         </div>
       </div>
       <div class="materias-expand" id="materias-edicao-1">
-        <div class="materias-grid">
-
-          <div class="materia-card" onclick="abrirMateria('e01m01')">
-            <div class="materia-card-img-placeholder"></div>
-            <div class="materia-card-body">
-              <div class="materia-card-num">Matéria 01</div>
-              <div class="materia-card-title">Luzes apagadas para 2026!</div>
-              <div class="materia-card-excerpt">O manifesto inaugural do The MoodBoard e o que nos move.</div>
-              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Manifesto</span>
-              <span class="materia-card-read">Ler →</span>
+        <div class="pdf-card-wrapper">
+          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-1'), 'The Moodboard-Edição 1.pdf', '01', 'Luzes apagadas para 2026!', 'Abril 2026 · Primeira edição')">
+            <div class="pdf-card-visual">
+              <span class="pdf-card-ghost">01</span>
+              <div class="pdf-card-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
+                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--pink)" opacity="0.3"/>
+                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pdf-card-label">PDF · Edição Completa</div>
+            </div>
+            <div class="pdf-card-body">
+              <div class="pdf-card-num">Edição 01</div>
+              <div class="pdf-card-title">Luzes apagadas para 2026!</div>
+              <div class="pdf-card-desc">Primeira edição completa do The MoodBoard — manifesto inaugural, cultura, opinião e muito mais. Leia direto aqui, sem sair da página.</div>
+              <div class="pdf-card-footer">
+                <span class="pdf-card-tag" style="color:var(--pink);border-color:var(--pink)">5 matérias · ~20 min</span>
+                <span class="pdf-card-read">Abrir PDF ↓</span>
+              </div>
             </div>
           </div>
-
-          <div class="materia-card" onclick="abrirMateria('e01m02')">
-            <div class="materia-card-img-placeholder"></div>
-            <div class="materia-card-body">
-              <div class="materia-card-num">Matéria 02</div>
-              <div class="materia-card-title">Título da Matéria 2</div>
-              <div class="materia-card-excerpt">Resumo breve da matéria 2 para o leitor ter uma prévia do conteúdo.</div>
-              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Cultura</span>
-              <span class="materia-card-read">Ler →</span>
-            </div>
-          </div>
-
-          <div class="materia-card" onclick="abrirMateria('e01m03')">
-            <div class="materia-card-img-placeholder"></div>
-            <div class="materia-card-body">
-              <div class="materia-card-num">Matéria 03</div>
-              <div class="materia-card-title">Título da Matéria 3</div>
-              <div class="materia-card-excerpt">Resumo breve da matéria 3 para o leitor ter uma prévia do conteúdo.</div>
-              <span class="materia-card-tag" style="color:var(--black);border-color:var(--black)">Opinião</span>
-              <span class="materia-card-read">Ler →</span>
-            </div>
-          </div>
-
-          <div class="materia-card" onclick="abrirMateria('e01m04')">
-            <div class="materia-card-img-placeholder"></div>
-            <div class="materia-card-body">
-              <div class="materia-card-num">Matéria 04</div>
-              <div class="materia-card-title">Título da Matéria 4</div>
-              <div class="materia-card-excerpt">Resumo breve da matéria 4 para o leitor ter uma prévia do conteúdo.</div>
-              <span class="materia-card-tag" style="color:var(--pink);border-color:var(--pink)">Entrevista</span>
-              <span class="materia-card-read">Ler →</span>
-            </div>
-          </div>
-
-          <div class="materia-card" onclick="abrirMateria('e01m05')">
-            <div class="materia-card-img-placeholder"></div>
-            <div class="materia-card-body">
-              <div class="materia-card-num">Matéria 05</div>
-              <div class="materia-card-title">Título da Matéria 5</div>
-              <div class="materia-card-excerpt">Resumo breve da matéria 5 para o leitor ter uma prévia do conteúdo.</div>
-              <span class="materia-card-tag" style="color:var(--orange);border-color:var(--orange)">Atualidades</span>
-              <span class="materia-card-read">Ler →</span>
-            </div>
-          </div>
-
         </div>
         <div class="materias-footer">
-          <span class="materias-footer-label">5 matérias · Edição 01</span>
+          <span class="materias-footer-label">Edição completa em PDF · Edição 01</span>
           <button class="materias-fechar" onclick="toggleEdicao('edicao-1')">↑ Fechar</button>
         </div>
       </div>
@@ -1553,6 +1597,82 @@ footer {
       </div>
     </div>
 
+    <!-- ── EDIÇÃO 04 ── -->
+    <div id="edicao-4" class="edition-row">
+      <div class="edition-row-header" onclick="toggleEdicao('edicao-4')">
+        <div class="edition-row-visual" style="background:#C0392B">
+          <span class="edition-row-ghost">4</span>
+          <div class="edition-row-num">04</div>
+          <div class="edition-row-label">Quarta edição</div>
+        </div>
+        <div class="edition-row-body">
+          <div class="edition-row-date">Junho 2026 · 4 matérias · ~25 min</div>
+          <div class="edition-row-title">Dias dos namorados</div>
+          <div class="edition-row-excerpt">Manual de sobrevivência do amor moderno</div>
+          <div class="edition-row-footer">
+            <span class="edition-row-tag" style="color:#C0392B;border-color:#C0392B">Especial</span>
+            <span class="edition-read">Ler edição ↓</span>
+          </div>
+        </div>
+      </div>
+      <div class="materias-expand" id="materias-edicao-4">
+        <div class="pdf-card-wrapper">
+          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-4'), 'The Moodboard-Edição 4.pdf', '04', 'Dias dos namorados', 'Junho 2026 · Quarta edição')">
+            <div class="pdf-card-visual" style="background:#C0392B">
+              <span class="pdf-card-ghost">04</span>
+              <div class="pdf-card-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
+                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--pink)" opacity="0.3"/>
+                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pdf-card-label">PDF · Edição Completa</div>
+            </div>
+            <div class="pdf-card-body">
+              <div class="pdf-card-num">Edição 04</div>
+              <div class="pdf-card-title">Dias dos namorados</div>
+              <div class="pdf-card-desc">Manual de sobrevivência do amor moderno</div>
+              <div class="pdf-card-footer">
+                <span class="pdf-card-tag" style="color:#C0392B;border-color:#C0392B">4 matérias · ~25 min</span>
+                <span class="pdf-card-read">Abrir PDF ↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="materias-footer">
+          <span class="materias-footer-label">Edição completa em PDF · Edição 04</span>
+          <button class="materias-fechar" onclick="toggleEdicao('edicao-4')">↑ Fechar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LEITOR DE PDF INLINE -->
+  <div class="inline-reader" id="inlineReader">
+    <div class="inline-reader-inner">
+      <div class="inline-topbar">
+        <button class="inline-back" onclick="fecharLeitor()">
+          <span class="inline-back-arrow">←</span> Fechar
+        </button>
+        <div class="inline-meta">
+          <div class="inline-num" id="inlineNum">01</div>
+          <div>
+            <div class="inline-title" id="inlineTitle">Título</div>
+            <div class="inline-sub" id="inlineSub">Meta</div>
+          </div>
+        </div>
+        <div class="inline-actions">
+          <a class="inline-btn primary" id="inlineDownload" href="#" download>↓ Download</a>
+        </div>
+      </div>
+      <div class="inline-frame">
+        <iframe id="inlineIframe" src="" allowfullscreen></iframe>
+      </div>
+    </div>
   </div>
 
   <!-- LEITOR DE MATÉRIA (overlay) -->
@@ -1795,6 +1915,7 @@ function toggleEdicao(id) {
   // Fecha todas
   document.querySelectorAll('.materias-expand').forEach(m => m.classList.remove('open'));
   document.querySelectorAll('.edition-row').forEach(r => r.classList.remove('active-card'));
+  fecharLeitor();
   if (!isOpen) {
     materias.classList.add('open');
     row.classList.add('active-card');
@@ -1864,31 +1985,35 @@ function goTo(page) {
 function abrirEdicao(cardEl, pdfPath, num, titulo, meta) {
   const reader = document.getElementById('inlineReader');
   const grid   = document.getElementById('edicoesGrid');
- 
+
+  // Encontra o edition-row pai (se cardEl for o pdf-card, sobe até o edition-row)
+  const edicaoRow = cardEl.closest ? (cardEl.closest('.edition-row') || cardEl) : cardEl;
+
   document.querySelectorAll('.edition-row').forEach(r => r.classList.remove('active-card'));
- 
+
   const jaAberto = reader.classList.contains('open');
-  const mesmoCarta = cardEl.dataset.ativo === 'true';
- 
+  const mesmoCarta = edicaoRow.dataset.ativo === 'true';
+
   if (jaAberto && mesmoCarta) {
     fecharLeitor();
     return;
   }
- 
+
   document.querySelectorAll('.edition-row').forEach(r => r.dataset.ativo = 'false');
-  cardEl.dataset.ativo = 'true';
-  cardEl.classList.add('active-card');
- 
+  edicaoRow.dataset.ativo = 'true';
+  edicaoRow.classList.add('active-card');
+
   const { previewUrl, downloadUrl } = getPdfUrls(pdfPath);
- 
+
   document.getElementById('inlineNum').textContent   = num;
   document.getElementById('inlineTitle').textContent = titulo;
   document.getElementById('inlineSub').textContent   = meta;
   document.getElementById('inlineDownload').href     = downloadUrl;
   document.getElementById('inlineIframe').src        = previewUrl;
- 
-  grid.appendChild(reader);
- 
+
+  // Insere o reader logo após o edition-row correspondente
+  edicaoRow.parentNode.insertBefore(reader, edicaoRow.nextSibling);
+
   if (!jaAberto) {
     requestAnimationFrame(() => {
       reader.classList.add('open');
@@ -1919,10 +2044,11 @@ function getPdfUrls(pdfInput) {
     };
   }
  
-  // Arquivo local ou URL direta — usa Google Docs Viewer como proxy
-  const encoded = encodeURIComponent(pdfInput.startsWith('http') ? pdfInput : window.location.href.replace(/\/[^/]*$/, '/') + pdfInput);
+  // Arquivo local ou URL direta — usa iframe direto (funciona em file:// e servidores)
+  const isHttp = pdfInput.startsWith('http');
+  const previewUrl = isHttp ? pdfInput : pdfInput; // caminho relativo direto no iframe
   return {
-    previewUrl:  `https://docs.google.com/viewer?url=${encoded}&embedded=true`,
+    previewUrl:  previewUrl,
     downloadUrl: pdfInput,
   };
 }
