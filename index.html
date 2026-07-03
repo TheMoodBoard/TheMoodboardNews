@@ -1258,13 +1258,13 @@ footer {
         <button class="btn-ghost" onclick="goTo('edicoes')">Ver todas as edições</button>
       </div>
     </div>
-    <div class="hero-cover" style="background:#C0392B">
+    <div class="hero-cover" style="background:#1E8449">
       <div class="cover-card">
         <div class="cover-card-tag">Edição atual</div>
-        <div class="cover-card-num">04</div>
-        <div class="cover-card-title">Dias dos namorados</div>
-        <div class="cover-card-desc">4 matérias · ~25 min de leitura · Jun 2026</div>
-        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#C0392B">Ler agora →</div>
+        <div class="cover-card-num">05</div>
+        <div class="cover-card-title">Brasil em foco</div>
+        <div class="cover-card-desc">5 matérias · ~30 min de leitura · Jul 2026</div>
+        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#1E8449">Ler agora →</div>
       </div>
     </div>
     <div class="scroll-hint" onclick="document.getElementById('home-content').scrollIntoView({behavior:'smooth'})">
@@ -1285,6 +1285,16 @@ footer {
   </div>
   <div class="editions-grid reveal">
     <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:#1E8449"><span class="ecard-top-num">05</span><span class="ecard-top-text">Brasil<br>em foco</span></div>
+      <div class="ecard-stripe" style="background:#1E8449"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 5 · Jul 2026</div>
+        <div class="ecard-title">Brasil em foco</div>
+        <div class="ecard-excerpt">Cultura brasileira na moda, movimento LGBTQ+, Copas e política, complexo de vira-lata e o Brasil além do futebol.</div>
+        <span class="ecard-tag" style="color:#1E8449;border-color:#1E8449">Especial · Brasil</span>
+      </div>
+    </div>
+    <div class="ecard" onclick="goTo('edicoes')">
       <div class="ecard-top" style="background:#C0392B"><span class="ecard-top-num">04</span><span class="ecard-top-text">Dias dos<br>Namorados</span></div>
       <div class="ecard-stripe" style="background:#C0392B"></div>
       <div class="ecard-body">
@@ -1302,16 +1312,6 @@ footer {
         <div class="ecard-title">Como o TikTok está mudando o mundo da moda</div>
         <div class="ecard-excerpt">Trends, algoritmos, identidade e o futuro das passarelas na era digital.</div>
         <span class="ecard-tag" style="color:var(--pink);border-color:var(--pink)">Moda · Cultura</span>
-      </div>
-    </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:var(--orange)"><span class="ecard-top-num">02</span><span class="ecard-top-text" style="color:#1a1a1a">Copa,<br>Redes & +</span></div>
-      <div class="ecard-stripe" style="background:var(--pink)"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 2 · Abr 2026</div>
-        <div class="ecard-title">Clima de Copa, Redes Sociais e Lollapalooza</div>
-        <div class="ecard-excerpt">Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lolla.</div>
-        <span class="ecard-tag" style="color:var(--orange);border-color:var(--orange)">Esportes · Cultura</span>
       </div>
     </div>
   </div>
@@ -1645,6 +1645,58 @@ footer {
         <div class="materias-footer">
           <span class="materias-footer-label">Edição completa em PDF · Edição 04</span>
           <button class="materias-fechar" onclick="toggleEdicao('edicao-4')">↑ Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── EDIÇÃO 05 ── -->
+    <div id="edicao-5" class="edition-row">
+      <div class="edition-row-header" onclick="toggleEdicao('edicao-5')">
+        <div class="edition-row-visual" style="background:#1E8449">
+          <span class="edition-row-ghost">5</span>
+          <div class="edition-row-num">05</div>
+          <div class="edition-row-label">Quinta edição</div>
+        </div>
+        <div class="edition-row-body">
+          <div class="edition-row-date">Julho 2026 · 5 matérias · ~30 min</div>
+          <div class="edition-row-title">Brasil em foco</div>
+          <div class="edition-row-excerpt">Um mergulho na identidade brasileira: moda, direitos LGBTQ+, futebol e política, complexo de vira-lata e o esporte além das quatro linhas.</div>
+          <div class="edition-row-footer">
+            <span class="edition-row-tag" style="color:#1E8449;border-color:#1E8449">Moda · Atualidades · Política · Cultura Pop · Esportes</span>
+            <span class="edition-read">Ler edição ↓</span>
+          </div>
+        </div>
+      </div>
+      <div class="materias-expand" id="materias-edicao-5">
+        <div class="pdf-card-wrapper">
+          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-5'), 'The Moodboard-Edição 5.pdf', '05', 'Brasil em foco', 'Julho 2026 · Quinta edição')">
+            <div class="pdf-card-visual" style="background:#1E8449">
+              <span class="pdf-card-ghost">05</span>
+              <div class="pdf-card-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
+                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--orange)" opacity="0.3"/>
+                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pdf-card-label">PDF · Edição Completa</div>
+            </div>
+            <div class="pdf-card-body">
+              <div class="pdf-card-num">Edição 05</div>
+              <div class="pdf-card-title">Brasil em foco</div>
+              <div class="pdf-card-desc">A influência da cultura brasileira na moda, a história do movimento LGBTQ+, as Copas e a política, o complexo de inferioridade cultural e o Brasil além do futebol.</div>
+              <div class="pdf-card-footer">
+                <span class="pdf-card-tag" style="color:#1E8449;border-color:#1E8449">5 matérias · ~30 min</span>
+                <span class="pdf-card-read">Abrir PDF ↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="materias-footer">
+          <span class="materias-footer-label">Edição completa em PDF · Edição 05</span>
+          <button class="materias-fechar" onclick="toggleEdicao('edicao-5')">↑ Fechar</button>
         </div>
       </div>
     </div>
