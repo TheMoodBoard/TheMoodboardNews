@@ -1258,13 +1258,13 @@ footer {
         <button class="btn-ghost" onclick="goTo('edicoes')">Ver todas as edições</button>
       </div>
     </div>
-    <div class="hero-cover" style="background:#1E8449">
+    <div class="hero-cover" style="background:#2874A6">
       <div class="cover-card">
         <div class="cover-card-tag">Edição atual</div>
-        <div class="cover-card-num">05</div>
-        <div class="cover-card-title">Brasil em foco</div>
-        <div class="cover-card-desc">5 matérias · ~30 min de leitura · Jul 2026</div>
-        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#1E8449">Ler agora →</div>
+        <div class="cover-card-num">06</div>
+        <div class="cover-card-title">Ciência, esporte e estilo</div>
+        <div class="cover-card-desc">4 matérias · ~25 min de leitura · Set 2026</div>
+        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#2874A6">Ler agora →</div>
       </div>
     </div>
     <div class="scroll-hint" onclick="document.getElementById('home-content').scrollIntoView({behavior:'smooth'})">
@@ -1284,6 +1284,16 @@ footer {
     <a class="sec-link" onclick="goTo('edicoes')">Ver arquivo completo →</a>
   </div>
   <div class="editions-grid reveal">
+    <div class="ecard" onclick="goTo('edicoes')">
+      <div class="ecard-top" style="background:#2874A6"><span class="ecard-top-num">06</span><span class="ecard-top-text">Ciência,<br>esporte<br>e estilo</span></div>
+      <div class="ecard-stripe" style="background:#2874A6"></div>
+      <div class="ecard-body">
+        <div class="ecard-meta">Nº 6 · Set 2026</div>
+        <div class="ecard-title">Ciência, esporte e estilo</div>
+        <div class="ecard-excerpt">IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e indicações literárias.</div>
+        <span class="ecard-tag" style="color:#2874A6;border-color:#2874A6">Saúde · Esportes · Moda · Cultura</span>
+      </div>
+    </div>
     <div class="ecard" onclick="goTo('edicoes')">
       <div class="ecard-top" style="background:#1E8449"><span class="ecard-top-num">05</span><span class="ecard-top-text">Brasil<br>em foco</span></div>
       <div class="ecard-stripe" style="background:#1E8449"></div>
@@ -1697,6 +1707,58 @@ footer {
         <div class="materias-footer">
           <span class="materias-footer-label">Edição completa em PDF · Edição 05</span>
           <button class="materias-fechar" onclick="toggleEdicao('edicao-5')">↑ Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIÇÃO 6 -->
+    <div id="edicao-6" class="edition-row">
+      <div class="edition-row-header" onclick="toggleEdicao('edicao-6')">
+        <div class="edition-row-visual" style="background:#2874A6">
+          <span class="edition-row-ghost">6</span>
+          <div class="edition-row-num">06</div>
+          <div class="edition-row-label">Sexta edição</div>
+        </div>
+        <div class="edition-row-body">
+          <div class="edition-row-date">Setembro 2026 · 4 matérias · ~25 min</div>
+          <div class="edition-row-title">Ciência, esporte e estilo</div>
+          <div class="edition-row-excerpt">IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e o mood literário da volta das férias.</div>
+          <div class="edition-row-footer">
+            <span class="edition-row-tag" style="color:#2874A6;border-color:#2874A6">Saúde · Esportes · Moda · Cultura</span>
+            <span class="edition-read">Ler edição ↓</span>
+          </div>
+        </div>
+      </div>
+      <div class="materias-expand" id="materias-edicao-6">
+        <div class="pdf-card-wrapper">
+          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-6'), 'The Moodboard-Edição 6.pdf', '06', 'Ciência, esporte e estilo', 'Setembro 2026 · Sexta edição')">
+            <div class="pdf-card-visual" style="background:#2874A6">
+              <span class="pdf-card-ghost">06</span>
+              <div class="pdf-card-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
+                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--orange)" opacity="0.3"/>
+                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="pdf-card-label">PDF · Edição Completa</div>
+            </div>
+            <div class="pdf-card-body">
+              <div class="pdf-card-num">Edição 06</div>
+              <div class="pdf-card-title">Ciência, esporte e estilo</div>
+              <div class="pdf-card-desc">A inteligência artificial na vigilância da malária, esportes para começar ainda em 2026, como montar um guarda-roupa versátil e indicações de livros para a volta das férias.</div>
+              <div class="pdf-card-footer">
+                <span class="pdf-card-tag" style="color:#2874A6;border-color:#2874A6">4 matérias · ~25 min</span>
+                <span class="pdf-card-read">Abrir PDF ↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="materias-footer">
+          <span class="materias-footer-label">Edição completa em PDF · Edição 06</span>
+          <button class="materias-fechar" onclick="toggleEdicao('edicao-6')">↑ Fechar</button>
         </div>
       </div>
     </div>
