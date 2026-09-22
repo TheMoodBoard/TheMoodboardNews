@@ -7,9 +7,7 @@ backend:
   name: github
   repo: TheMoodBoard/TheMoodboardNews
   branch: main
-  # TODO(1): troque pela URL do seu proxy OAuth (ver INSTRUCOES-PAINEL.md).
-  #          Ex.: https://moodboard-oauth.SEU-USUARIO.workers.dev
-  base_url: https://COLOQUE-AQUI-O-PROXY-OAUTH.workers.dev
+  base_url: https://moodboard-oauth.rafaelpcmkt.workers.dev
 
 # Para TESTAR localmente sem OAuth: rode `npx decap-server` num terminal
 # e descomente a linha abaixo (comente-a de novo antes de publicar):
