@@ -1258,15 +1258,7 @@ footer {
         <button class="btn-ghost" onclick="goTo('edicoes')">Ver todas as edições</button>
       </div>
     </div>
-    <div class="hero-cover" style="background:#2874A6">
-      <div class="cover-card">
-        <div class="cover-card-tag">Edição atual</div>
-        <div class="cover-card-num">06</div>
-        <div class="cover-card-title">Ciência, esporte e estilo</div>
-        <div class="cover-card-desc">4 matérias · ~25 min de leitura · Set 2026</div>
-        <div class="cover-card-btn" onclick="goTo('edicoes')" style="background:#2874A6">Ler agora →</div>
-      </div>
-    </div>
+    <div class="hero-cover" id="heroCover"></div>
     <div class="scroll-hint" onclick="document.getElementById('home-content').scrollIntoView({behavior:'smooth'})">
       <span class="scroll-hint-label">Rolar</span>
       <div class="scroll-hint-arrow"></div>
@@ -1283,48 +1275,7 @@ footer {
     <div class="sec-title">Últimas Edições</div>
     <a class="sec-link" onclick="goTo('edicoes')">Ver arquivo completo →</a>
   </div>
-  <div class="editions-grid reveal">
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:#2874A6"><span class="ecard-top-num">06</span><span class="ecard-top-text">Ciência,<br>esporte<br>e estilo</span></div>
-      <div class="ecard-stripe" style="background:#2874A6"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 6 · Set 2026</div>
-        <div class="ecard-title">Ciência, esporte e estilo</div>
-        <div class="ecard-excerpt">IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e indicações literárias.</div>
-        <span class="ecard-tag" style="color:#2874A6;border-color:#2874A6">Saúde · Esportes · Moda · Cultura</span>
-      </div>
-    </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:#1E8449"><span class="ecard-top-num">05</span><span class="ecard-top-text">Brasil<br>em foco</span></div>
-      <div class="ecard-stripe" style="background:#1E8449"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 5 · Jul 2026</div>
-        <div class="ecard-title">Brasil em foco</div>
-        <div class="ecard-excerpt">Cultura brasileira na moda, movimento LGBTQ+, Copas e política, complexo de vira-lata e o Brasil além do futebol.</div>
-        <span class="ecard-tag" style="color:#1E8449;border-color:#1E8449">Especial · Brasil</span>
-      </div>
-    </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:#C0392B"><span class="ecard-top-num">04</span><span class="ecard-top-text">Dias dos<br>Namorados</span></div>
-      <div class="ecard-stripe" style="background:#C0392B"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 4 · Jun 2026</div>
-        <div class="ecard-title">Dias dos namorados</div>
-        <div class="ecard-excerpt">Manual de sobrevivência do amor moderno.</div>
-        <span class="ecard-tag" style="color:#C0392B;border-color:#C0392B">Especial</span>
-      </div>
-    </div>
-    <div class="ecard" onclick="goTo('edicoes')">
-      <div class="ecard-top" style="background:var(--pink)"><span class="ecard-top-num">03</span><span class="ecard-top-text">TikTok<br>& Moda</span></div>
-      <div class="ecard-stripe" style="background:var(--orange)"></div>
-      <div class="ecard-body">
-        <div class="ecard-meta">Nº 3 · Mai 2026</div>
-        <div class="ecard-title">Como o TikTok está mudando o mundo da moda</div>
-        <div class="ecard-excerpt">Trends, algoritmos, identidade e o futuro das passarelas na era digital.</div>
-        <span class="ecard-tag" style="color:var(--pink);border-color:var(--pink)">Moda · Cultura</span>
-      </div>
-    </div>
-  </div>
+  <div class="editions-grid reveal" id="homeEdicoesGrid"></div>
  
   <section class="manifesto reveal">
     <div class="manifesto-left">
@@ -1380,11 +1331,11 @@ footer {
   <div class="editions-page-grid" id="edicoesGrid">
 
     <!-- ══════════════════════════════════════════════════════════════════
-         COMO ADICIONAR NOVAS EDIÇÕES:
-         1. Copie um bloco .edition-row completo abaixo
-         2. Atualize: id="edicao-2", cor de fundo, número, título, metadados
-         3. Para cada matéria: atualize num, tag, tagColor, autor, titulo, texto
-         4. Adicione ou remova cards de matéria conforme necessário
+         COMO ADICIONAR NOVAS EDIÇÕES (04 em diante):
+         NÃO edite este HTML. Use o painel em /admin/ (ou edite edicoes.json).
+         As edições 01–03 abaixo são estáticas (têm leitores de matéria).
+         As edições 04+ e os destaques da home são gerados a partir de
+         edicoes.json pelo script no fim do arquivo.
          ══════════════════════════════════════════════════════════════════ -->
 
     <!-- ── EDIÇÃO 01 ── -->
@@ -1607,161 +1558,9 @@ footer {
       </div>
     </div>
 
-    <!-- ── EDIÇÃO 04 ── -->
-    <div id="edicao-4" class="edition-row">
-      <div class="edition-row-header" onclick="toggleEdicao('edicao-4')">
-        <div class="edition-row-visual" style="background:#C0392B">
-          <span class="edition-row-ghost">4</span>
-          <div class="edition-row-num">04</div>
-          <div class="edition-row-label">Quarta edição</div>
-        </div>
-        <div class="edition-row-body">
-          <div class="edition-row-date">Junho 2026 · 4 matérias · ~25 min</div>
-          <div class="edition-row-title">Dias dos namorados</div>
-          <div class="edition-row-excerpt">Manual de sobrevivência do amor moderno</div>
-          <div class="edition-row-footer">
-            <span class="edition-row-tag" style="color:#C0392B;border-color:#C0392B">Especial</span>
-            <span class="edition-read">Ler edição ↓</span>
-          </div>
-        </div>
-      </div>
-      <div class="materias-expand" id="materias-edicao-4">
-        <div class="pdf-card-wrapper">
-          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-4'), 'The Moodboard-Edição 4.pdf', '04', 'Dias dos namorados', 'Junho 2026 · Quarta edição')">
-            <div class="pdf-card-visual" style="background:#C0392B">
-              <span class="pdf-card-ghost">04</span>
-              <div class="pdf-card-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
-                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--pink)" opacity="0.3"/>
-                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="pdf-card-label">PDF · Edição Completa</div>
-            </div>
-            <div class="pdf-card-body">
-              <div class="pdf-card-num">Edição 04</div>
-              <div class="pdf-card-title">Dias dos namorados</div>
-              <div class="pdf-card-desc">Manual de sobrevivência do amor moderno</div>
-              <div class="pdf-card-footer">
-                <span class="pdf-card-tag" style="color:#C0392B;border-color:#C0392B">4 matérias · ~25 min</span>
-                <span class="pdf-card-read">Abrir PDF ↓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="materias-footer">
-          <span class="materias-footer-label">Edição completa em PDF · Edição 04</span>
-          <button class="materias-fechar" onclick="toggleEdicao('edicao-4')">↑ Fechar</button>
-        </div>
-      </div>
-    </div>
+    <!-- Edições 04+ renderizadas dinamicamente a partir de edicoes.json -->
+    <div id="edicoesDinamicas"></div>
 
-    <!-- ── EDIÇÃO 05 ── -->
-    <div id="edicao-5" class="edition-row">
-      <div class="edition-row-header" onclick="toggleEdicao('edicao-5')">
-        <div class="edition-row-visual" style="background:#1E8449">
-          <span class="edition-row-ghost">5</span>
-          <div class="edition-row-num">05</div>
-          <div class="edition-row-label">Quinta edição</div>
-        </div>
-        <div class="edition-row-body">
-          <div class="edition-row-date">Julho 2026 · 5 matérias · ~30 min</div>
-          <div class="edition-row-title">Brasil em foco</div>
-          <div class="edition-row-excerpt">Um mergulho na identidade brasileira: moda, direitos LGBTQ+, futebol e política, complexo de vira-lata e o esporte além das quatro linhas.</div>
-          <div class="edition-row-footer">
-            <span class="edition-row-tag" style="color:#1E8449;border-color:#1E8449">Moda · Atualidades · Política · Cultura Pop · Esportes</span>
-            <span class="edition-read">Ler edição ↓</span>
-          </div>
-        </div>
-      </div>
-      <div class="materias-expand" id="materias-edicao-5">
-        <div class="pdf-card-wrapper">
-          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-5'), 'The Moodboard-Edição 5.pdf', '05', 'Brasil em foco', 'Julho 2026 · Quinta edição')">
-            <div class="pdf-card-visual" style="background:#1E8449">
-              <span class="pdf-card-ghost">05</span>
-              <div class="pdf-card-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
-                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--orange)" opacity="0.3"/>
-                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="pdf-card-label">PDF · Edição Completa</div>
-            </div>
-            <div class="pdf-card-body">
-              <div class="pdf-card-num">Edição 05</div>
-              <div class="pdf-card-title">Brasil em foco</div>
-              <div class="pdf-card-desc">A influência da cultura brasileira na moda, a história do movimento LGBTQ+, as Copas e a política, o complexo de inferioridade cultural e o Brasil além do futebol.</div>
-              <div class="pdf-card-footer">
-                <span class="pdf-card-tag" style="color:#1E8449;border-color:#1E8449">5 matérias · ~30 min</span>
-                <span class="pdf-card-read">Abrir PDF ↓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="materias-footer">
-          <span class="materias-footer-label">Edição completa em PDF · Edição 05</span>
-          <button class="materias-fechar" onclick="toggleEdicao('edicao-5')">↑ Fechar</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- EDIÇÃO 6 -->
-    <div id="edicao-6" class="edition-row">
-      <div class="edition-row-header" onclick="toggleEdicao('edicao-6')">
-        <div class="edition-row-visual" style="background:#2874A6">
-          <span class="edition-row-ghost">6</span>
-          <div class="edition-row-num">06</div>
-          <div class="edition-row-label">Sexta edição</div>
-        </div>
-        <div class="edition-row-body">
-          <div class="edition-row-date">Setembro 2026 · 4 matérias · ~25 min</div>
-          <div class="edition-row-title">Ciência, esporte e estilo</div>
-          <div class="edition-row-excerpt">IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e o mood literário da volta das férias.</div>
-          <div class="edition-row-footer">
-            <span class="edition-row-tag" style="color:#2874A6;border-color:#2874A6">Saúde · Esportes · Moda · Cultura</span>
-            <span class="edition-read">Ler edição ↓</span>
-          </div>
-        </div>
-      </div>
-      <div class="materias-expand" id="materias-edicao-6">
-        <div class="pdf-card-wrapper">
-          <div class="pdf-edition-card" onclick="abrirEdicao(document.getElementById('edicao-6'), 'The Moodboard-Edição 6.pdf', '06', 'Ciência, esporte e estilo', 'Setembro 2026 · Sexta edição')">
-            <div class="pdf-card-visual" style="background:#2874A6">
-              <span class="pdf-card-ghost">06</span>
-              <div class="pdf-card-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>
-                  <rect x="6" y="3" width="14" height="14" rx="1" fill="var(--orange)" opacity="0.3"/>
-                  <line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                  <line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="pdf-card-label">PDF · Edição Completa</div>
-            </div>
-            <div class="pdf-card-body">
-              <div class="pdf-card-num">Edição 06</div>
-              <div class="pdf-card-title">Ciência, esporte e estilo</div>
-              <div class="pdf-card-desc">A inteligência artificial na vigilância da malária, esportes para começar ainda em 2026, como montar um guarda-roupa versátil e indicações de livros para a volta das férias.</div>
-              <div class="pdf-card-footer">
-                <span class="pdf-card-tag" style="color:#2874A6;border-color:#2874A6">4 matérias · ~25 min</span>
-                <span class="pdf-card-read">Abrir PDF ↓</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="materias-footer">
-          <span class="materias-footer-label">Edição completa em PDF · Edição 06</span>
-          <button class="materias-fechar" onclick="toggleEdicao('edicao-6')">↑ Fechar</button>
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -2230,7 +2029,157 @@ updateDays();
 function irParaUltimaEdicao() {
   goTo('edicoes');
 }
- 
+
+</script>
+
+<!-- ─────────────────────────────────────────────────────────────────
+     RENDER DINÂMICO DAS EDIÇÕES (a partir de edicoes.json)
+     As edições 01–03 permanecem estáticas no HTML (leitores de matéria).
+     As demais (04+) e os destaques da home vêm deste JSON.
+────────────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  const PDF_ICON = '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    + '<rect x="6" y="3" width="24" height="31" rx="2" fill="white" stroke="var(--black)" stroke-width="2"/>'
+    + '<rect x="6" y="3" width="14" height="14" rx="1" fill="var(--orange)" opacity="0.3"/>'
+    + '<line x1="11" y1="20" x2="25" y2="20" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>'
+    + '<line x1="11" y1="24" x2="25" y2="24" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/>'
+    + '<line x1="11" y1="28" x2="20" y2="28" stroke="var(--black)" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+  function pdfSrc(ed) { return (ed.pdf && ed.pdf.trim()) || (ed.pdfLink && ed.pdfLink.trim()) || ''; }
+  function home(ed, k, fb) { return (ed.home && ed.home[k]) ? ed.home[k] : fb; }
+
+  function renderHero(ed) {
+    const el = document.getElementById('heroCover');
+    if (!el || !ed) return;
+    el.style.background = ed.cor;
+    el.innerHTML =
+      '<div class="cover-card">'
+      + '<div class="cover-card-tag">Edição atual</div>'
+      + '<div class="cover-card-num">' + esc(ed.num) + '</div>'
+      + '<div class="cover-card-title">' + esc(ed.titulo) + '</div>'
+      + '<div class="cover-card-desc">' + esc(ed.materias) + ' matérias · ' + esc(ed.tempo) + ' de leitura · ' + esc(ed.dataCurta) + '</div>'
+      + '<div class="cover-card-btn" style="background:' + esc(ed.cor) + '">Ler agora →</div>'
+      + '</div>';
+    el.querySelector('.cover-card-btn').addEventListener('click', function () { goTo('edicoes'); });
+  }
+
+  function renderHomeGrid(lista) {
+    const grid = document.getElementById('homeEdicoesGrid');
+    if (!grid) return;
+    grid.innerHTML = lista.map(function (ed) {
+      const stripe = home(ed, 'stripe', ed.cor);
+      return '<div class="ecard" data-goto="edicoes">'
+        + '<div class="ecard-top" style="background:' + esc(ed.cor) + '">'
+        +   '<span class="ecard-top-num">' + esc(ed.num) + '</span>'
+        +   '<span class="ecard-top-text">' + home(ed, 'topText', esc(ed.titulo)) + '</span>'
+        + '</div>'
+        + '<div class="ecard-stripe" style="background:' + esc(stripe) + '"></div>'
+        + '<div class="ecard-body">'
+        +   '<div class="ecard-meta">Nº ' + esc(ed.n) + ' · ' + esc(ed.dataCurta) + '</div>'
+        +   '<div class="ecard-title">' + esc(ed.titulo) + '</div>'
+        +   '<div class="ecard-excerpt">' + esc(home(ed, 'excerpt', ed.resumo)) + '</div>'
+        +   '<span class="ecard-tag" style="color:' + esc(ed.cor) + ';border-color:' + esc(ed.cor) + '">' + esc(home(ed, 'tag', ed.tags)) + '</span>'
+        + '</div></div>';
+    }).join('');
+    grid.querySelectorAll('[data-goto]').forEach(function (c) {
+      c.addEventListener('click', function () { goTo('edicoes'); });
+    });
+  }
+
+  function renderEdicoesDinamicas(lista) {
+    const cont = document.getElementById('edicoesDinamicas');
+    if (!cont) return;
+    cont.innerHTML = lista.map(function (ed) {
+      const rowId = 'edicao-' + ed.n;
+      return '<div id="' + rowId + '" class="edition-row">'
+        + '<div class="edition-row-header" data-toggle="' + rowId + '">'
+        +   '<div class="edition-row-visual" style="background:' + esc(ed.cor) + '">'
+        +     '<span class="edition-row-ghost">' + esc(ed.n) + '</span>'
+        +     '<div class="edition-row-num">' + esc(ed.num) + '</div>'
+        +     '<div class="edition-row-label">' + esc(ed.label) + '</div>'
+        +   '</div>'
+        +   '<div class="edition-row-body">'
+        +     '<div class="edition-row-date">' + esc(ed.data) + ' · ' + esc(ed.materias) + ' matérias · ' + esc(ed.tempo) + '</div>'
+        +     '<div class="edition-row-title">' + esc(ed.titulo) + '</div>'
+        +     '<div class="edition-row-excerpt">' + esc(ed.resumo) + '</div>'
+        +     '<div class="edition-row-footer">'
+        +       '<span class="edition-row-tag" style="color:' + esc(ed.cor) + ';border-color:' + esc(ed.cor) + '">' + esc(ed.tags) + '</span>'
+        +       '<span class="edition-read">Ler edição ↓</span>'
+        +     '</div>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="materias-expand" id="materias-' + rowId + '">'
+        +   '<div class="pdf-card-wrapper">'
+        +     '<div class="pdf-edition-card">'
+        +       '<div class="pdf-card-visual" style="background:' + esc(ed.cor) + '">'
+        +         '<span class="pdf-card-ghost">' + esc(ed.num) + '</span>'
+        +         '<div class="pdf-card-icon">' + PDF_ICON + '</div>'
+        +         '<div class="pdf-card-label">PDF · Edição Completa</div>'
+        +       '</div>'
+        +       '<div class="pdf-card-body">'
+        +         '<div class="pdf-card-num">Edição ' + esc(ed.num) + '</div>'
+        +         '<div class="pdf-card-title">' + esc(ed.titulo) + '</div>'
+        +         '<div class="pdf-card-desc">' + esc(ed.descricao || ed.resumo) + '</div>'
+        +         '<div class="pdf-card-footer">'
+        +           '<span class="pdf-card-tag" style="color:' + esc(ed.cor) + ';border-color:' + esc(ed.cor) + '">' + esc(ed.materias) + ' matérias · ' + esc(ed.tempo) + '</span>'
+        +           '<span class="pdf-card-read">Abrir PDF ↓</span>'
+        +         '</div>'
+        +       '</div>'
+        +     '</div>'
+        +   '</div>'
+        +   '<div class="materias-footer">'
+        +     '<span class="materias-footer-label">Edição completa em PDF · Edição ' + esc(ed.num) + '</span>'
+        +     '<button class="materias-fechar" data-toggle="' + rowId + '">↑ Fechar</button>'
+        +   '</div>'
+        + '</div>';
+    }).join('');
+
+    // Liga os handlers (toggle de expandir e abrir PDF)
+    lista.forEach(function (ed) {
+      const rowId = 'edicao-' + ed.n;
+      const row = document.getElementById(rowId);
+      if (!row) return;
+      const meta = ed.data + ' · ' + ed.label;
+      const src = pdfSrc(ed);
+      const card = row.parentNode.querySelector('#materias-' + rowId + ' .pdf-edition-card');
+      if (card) {
+        card.addEventListener('click', function () {
+          abrirEdicao(row, src, ed.num, ed.titulo, meta);
+        });
+      }
+    });
+    cont.querySelectorAll('[data-toggle]').forEach(function (el) {
+      el.addEventListener('click', function () { toggleEdicao(el.getAttribute('data-toggle')); });
+    });
+  }
+
+  function boot(edicoes) {
+    if (!Array.isArray(edicoes) || !edicoes.length) return;
+    // Deriva o número inteiro (n) a partir de "num" quando não informado
+    edicoes.forEach(function (e) { if (e.n == null || e.n === '') e.n = parseInt(e.num, 10) || 0; });
+    const ordenado = edicoes.slice().sort(function (a, b) { return b.n - a.n; }); // mais nova primeiro
+    renderHero(ordenado[0]);
+    renderHomeGrid(ordenado.slice(0, 4));
+    const dinamicas = ordenado.filter(function (e) { return !e.estatico; })
+                              .sort(function (a, b) { return a.n - b.n; }); // crescente na página
+    renderEdicoesDinamicas(dinamicas);
+  }
+
+  fetch('edicoes.json', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (data) { boot(data.edicoes || data); })
+    .catch(function (err) {
+      console.error('Não foi possível carregar edicoes.json:', err);
+      const cont = document.getElementById('edicoesDinamicas');
+      if (cont) cont.innerHTML = '<p style="padding:20px;color:#999">Não foi possível carregar as edições. Abra o site por um servidor (GitHub Pages) e não pelo arquivo local.</p>';
+    });
+})();
 </script>
 </body>
 </html>

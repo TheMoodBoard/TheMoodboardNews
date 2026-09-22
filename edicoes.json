@@ -1,0 +1,137 @@
+{
+  "edicoes": [
+    {
+      "num": "06",
+      "n": 6,
+      "label": "Sexta edição",
+      "cor": "#2874A6",
+      "data": "Setembro 2026",
+      "dataCurta": "Set 2026",
+      "titulo": "Ciência, esporte e estilo",
+      "resumo": "IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e o mood literário da volta das férias.",
+      "descricao": "A inteligência artificial na vigilância da malária, esportes para começar ainda em 2026, como montar um guarda-roupa versátil e indicações de livros para a volta das férias.",
+      "tags": "Saúde · Esportes · Moda · Cultura",
+      "materias": 4,
+      "tempo": "~25 min",
+      "pdf": "The Moodboard-Edição 6.pdf",
+      "pdfLink": "",
+      "estatico": false,
+      "home": {
+        "topText": "Ciência,<br>esporte<br>e estilo",
+        "excerpt": "IA no combate à malária, novos esportes para começar em 2026, um guarda-roupa versátil e indicações literárias.",
+        "tag": "Saúde · Esportes · Moda · Cultura"
+      }
+    },
+    {
+      "num": "05",
+      "n": 5,
+      "label": "Quinta edição",
+      "cor": "#1E8449",
+      "data": "Julho 2026",
+      "dataCurta": "Jul 2026",
+      "titulo": "Brasil em foco",
+      "resumo": "Um mergulho na identidade brasileira: moda, direitos LGBTQ+, futebol e política, complexo de vira-lata e o esporte além das quatro linhas.",
+      "descricao": "A influência da cultura brasileira na moda, a história do movimento LGBTQ+, as Copas e a política, o complexo de inferioridade cultural e o Brasil além do futebol.",
+      "tags": "Moda · Atualidades · Política · Cultura Pop · Esportes",
+      "materias": 5,
+      "tempo": "~30 min",
+      "pdf": "The Moodboard-Edição 5.pdf",
+      "pdfLink": "",
+      "estatico": false,
+      "home": {
+        "topText": "Brasil<br>em foco",
+        "excerpt": "Cultura brasileira na moda, movimento LGBTQ+, Copas e política, complexo de vira-lata e o Brasil além do futebol.",
+        "tag": "Especial · Brasil"
+      }
+    },
+    {
+      "num": "04",
+      "n": 4,
+      "label": "Quarta edição",
+      "cor": "#C0392B",
+      "data": "Junho 2026",
+      "dataCurta": "Jun 2026",
+      "titulo": "Dias dos namorados",
+      "resumo": "Manual de sobrevivência do amor moderno",
+      "descricao": "Manual de sobrevivência do amor moderno",
+      "tags": "Especial",
+      "materias": 4,
+      "tempo": "~25 min",
+      "pdf": "The Moodboard-Edição 4.pdf",
+      "pdfLink": "",
+      "estatico": false,
+      "home": {
+        "topText": "Dias dos<br>Namorados",
+        "excerpt": "Manual de sobrevivência do amor moderno.",
+        "tag": "Especial"
+      }
+    },
+    {
+      "num": "03",
+      "n": 3,
+      "label": "Terceira edição",
+      "cor": "var(--pink)",
+      "data": "Maio 2026",
+      "dataCurta": "Mai 2026",
+      "titulo": "Como o TikTok está mudando o mundo da moda",
+      "resumo": "Como o TikTok transformou a moda em algo colaborativo, veloz e democrático — e os desafios que isso traz.",
+      "descricao": "Como o TikTok transformou a moda em algo colaborativo, veloz e democrático.",
+      "tags": "Moda · Esportes · Opinião",
+      "materias": 4,
+      "tempo": "~30 min",
+      "pdf": "",
+      "pdfLink": "",
+      "estatico": true,
+      "home": {
+        "topText": "TikTok<br>& Moda",
+        "excerpt": "Trends, algoritmos, identidade e o futuro das passarelas na era digital.",
+        "tag": "Moda · Cultura",
+        "stripe": "var(--orange)"
+      }
+    },
+    {
+      "num": "02",
+      "n": 2,
+      "label": "Segunda edição",
+      "cor": "var(--orange)",
+      "data": "Abril 2026",
+      "dataCurta": "Abr 2026",
+      "titulo": "Clima de Copa, Redes Sociais e Lollapalooza",
+      "resumo": "Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lollapalooza Brasil.",
+      "descricao": "Copa do Mundo 2026, como estudar fora, comparação nas redes, mood literário e Lollapalooza Brasil.",
+      "tags": "Esportes · Cultura · Conselhos",
+      "materias": 5,
+      "tempo": "~30 min",
+      "pdf": "",
+      "pdfLink": "",
+      "estatico": true,
+      "home": {
+        "topText": "Copa &<br>Cultura",
+        "excerpt": "Copa do Mundo 2026, estudar fora, redes sociais, mood literário e Lollapalooza.",
+        "tag": "Esportes · Cultura"
+      }
+    },
+    {
+      "num": "01",
+      "n": 1,
+      "label": "Primeira edição",
+      "cor": "var(--pink)",
+      "data": "Abril 2026",
+      "dataCurta": "Abr 2026",
+      "titulo": "Luzes apagadas para 2026!",
+      "resumo": "Conheça a primeira edição do The MoodBoard!",
+      "descricao": "Conheça a primeira edição do The MoodBoard!",
+      "tags": "Manifesto",
+      "materias": 5,
+      "tempo": "~20 min",
+      "pdf": "The Moodboard-Edição 1.pdf",
+      "pdfLink": "",
+      "estatico": true,
+      "home": {
+        "topText": "Primeira<br>Edição",
+        "excerpt": "Conheça a primeira edição do The MoodBoard!",
+        "tag": "Manifesto"
+      }
+    }
+  ]
+}

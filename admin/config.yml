@@ -1,0 +1,62 @@
+# ─────────────────────────────────────────────────────────────
+# Configuração do painel (Decap CMS)
+# Publica editando o arquivo edicoes.json e enviando um commit ao GitHub.
+# ─────────────────────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: TheMoodBoard/TheMoodboardNews
+  branch: main
+  # TODO(1): troque pela URL do seu proxy OAuth (ver INSTRUCOES-PAINEL.md).
+  #          Ex.: https://moodboard-oauth.SEU-USUARIO.workers.dev
+  base_url: https://COLOQUE-AQUI-O-PROXY-OAUTH.workers.dev
+
+# Para TESTAR localmente sem OAuth: rode `npx decap-server` num terminal
+# e descomente a linha abaixo (comente-a de novo antes de publicar):
+# local_backend: true
+
+# Pasta onde os PDFs enviados pelo painel são guardados no repositório.
+media_folder: "uploads"
+public_folder: "uploads"
+
+locale: pt
+
+collections:
+  - name: "conteudo"
+    label: "Conteúdo do site"
+    files:
+      - name: "edicoes"
+        label: "Edições"
+        file: "edicoes.json"
+        description: "Adicione uma nova edição ou edite as existentes. A edição mais nova aparece automaticamente na home."
+        fields:
+          - name: "edicoes"
+            label: "Edições"
+            label_singular: "Edição"
+            widget: "list"
+            summary: "Nº {{fields.num}} — {{fields.titulo}}"
+            fields:
+              - { name: num, label: "Número (2 dígitos)", widget: string, hint: "Sempre com 2 dígitos: 07, 08, 09, 10..." }
+              - { name: titulo, label: "Título", widget: string }
+              - { name: label, label: "Selo", widget: string, hint: "Ex.: Sétima edição", default: "Nova edição" }
+              - { name: data, label: "Data (Mês Ano)", widget: string, hint: "Ex.: Outubro 2026" }
+              - { name: dataCurta, label: "Data curta", widget: string, hint: "Ex.: Out 2026" }
+              - { name: cor, label: "Cor de destaque (hex)", widget: string, default: "#2874A6", hint: "Ex.: #2874A6, #C0392B, #1E8449" }
+              - { name: tags, label: "Tags / editorias", widget: string, hint: "Ex.: Moda · Cultura · Esportes" }
+              - { name: resumo, label: "Resumo (frase curta)", widget: text }
+              - { name: descricao, label: "Descrição (card do PDF)", widget: text, required: false }
+              - { name: materias, label: "Nº de matérias", widget: number, value_type: int, default: 4 }
+              - { name: tempo, label: "Tempo de leitura", widget: string, default: "~25 min", hint: "Ex.: ~25 min" }
+              - { name: pdf, label: "PDF da edição (upload)", widget: file, required: false, hint: "Envie o arquivo PDF aqui." }
+              - { name: pdfLink, label: "OU link do Google Drive", widget: string, required: false, hint: "Use só se não fizer o upload acima." }
+              - { name: estatico, label: "estatico", widget: hidden, default: false }
+              - name: home
+                label: "Destaque na home (opcional)"
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: topText, label: "Texto do card colorido", widget: string, required: false, hint: "Curto. Pode usar <br> para quebrar linha." }
+                  - { name: excerpt, label: "Resumo na home", widget: text, required: false }
+                  - { name: tag, label: "Tag na home", widget: string, required: false }
+                  - { name: stripe, label: "Cor da faixa (opcional)", widget: string, required: false }
