@@ -1288,16 +1288,7 @@ footer {
       <p>A marca reflete exatamente isso: <strong>um espaço onde ideias se encontram como num quadro de referências</strong> — dinâmico, colorido, jovem.</p>
     </div>
   </section>
- 
-  <section class="subscribe reveal">
-    <div class="sub-left">
-      <div class="sub-eyebrow">Não perca nenhuma edição</div>
-      <div class="sub-title"> PRÓXIMA<br>EDIÇÃO EM<br>
-        <span id="diasRestantesHome">--</span> DIAS.
-      </div>
-    </div>
-  </section>
- 
+
   <footer>
     <img class="footer-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
     <div class="footer-links">
@@ -1604,15 +1595,6 @@ footer {
       </div>
     </div>
   </div>
- 
-  <section class="subscribe" style="margin-top:-3px;">
-    <div class="sub-left">
-      <div class="sub-eyebrow">Não perca nenhuma edição</div>
-      <div class="sub-title"> PRÓXIMA<br>EDIÇÃO EM<br>
-        <span id="diasRestantesEdicoes">--</span> DIAS.
-      </div>
-    </div>
-  </section>
  
   <footer>
     <img class="footer-logo" src="themoodboardlogo.png" onclick="goTo('home')" alt="The MoodBoard" style="height: 120px; cursor: pointer;" />
@@ -1995,36 +1977,6 @@ function initReveal() {
  
 initReveal();
  
-function updateDays() {
-  const now = new Date();
- 
-  const nextEdition = new Date("06/05/2026");
- 
-  const diff = nextEdition - now;
- 
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
- 
-  let texto;
- 
-  if (days < 0) {
-    texto = "DISPONÍVEL";
-  } else if (days === 0) {
-    texto = "HOJE";
-  } else if (days === 1) {
-    texto = "1";
-  } else {
-    texto = days;
-  }
- 
-  const home = document.getElementById("diasRestantesHome");
-  const edicoes = document.getElementById("diasRestantesEdicoes");
- 
-  if (home) home.innerText = texto;
-  if (edicoes) edicoes.innerText = texto;
-}
- 
-setInterval(updateDays, 1000 * 60 * 60);
-updateDays();
 
 function irParaUltimaEdicao() {
   goTo('edicoes');
