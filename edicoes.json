@@ -132,27 +132,6 @@
         "excerpt": "Conheça a primeira edição do The MoodBoard!",
         "tag": "Manifesto"
       }
-    },
-    {
-      "dataCurta": "TESTE",
-      "cor": "#2874A6",
-      "num": "00",
-      "descricao": "TESTE",
-      "data": "TESTE",
-      "materias": 0,
-      "pdf": "uploads/teste.pdf",
-      "label": "TESTE",
-      "resumo": "TESTE",
-      "tags": "TESTE",
-      "titulo": "TESTE",
-      "tempo": "~25 min",
-      "estatico": false,
-      "home": {
-        "topText": "TESTE",
-        "excerpt": "TESTE",
-        "tag": "TESTE",
-        "stripe": "TESTE"
-      }
     }
   ]
 }
