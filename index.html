@@ -632,6 +632,12 @@ footer {
   gap: 20px;
   padding: 40px 64px;
 }
+/* Edições dinâmicas (04+) usam o mesmo espaçamento das estáticas */
+#edicoesDinamicas {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 .edition-row {
   border: 2.5px solid var(--black);
   background: var(--white);
@@ -2089,6 +2095,7 @@ function irParaUltimaEdicao() {
         +     '<span class="materias-footer-label">Edição completa em PDF · Edição ' + esc(ed.num) + '</span>'
         +     '<button class="materias-fechar" data-toggle="' + rowId + '">↑ Fechar</button>'
         +   '</div>'
+        + '</div>'
         + '</div>';
     }).join('');
 
