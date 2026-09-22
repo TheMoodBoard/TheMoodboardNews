@@ -25,6 +25,9 @@ locale: pt
 collections:
   - name: "conteudo"
     label: "Conteúdo do site"
+    # Desliga o painel de pré-visualização (conteúdo é dados, não artigo).
+    editor:
+      preview: false
     files:
       - name: "edicoes"
         label: "Edições"
