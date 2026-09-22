@@ -1,27 +1,6 @@
 {
   "edicoes": [
     {
-      "dataCurta": "00",
-      "cor": "00",
-      "num": "00",
-      "descricao": "00",
-      "data": "00",
-      "materias": 4,
-      "pdf": "uploads/teste.pdf",
-      "label": "00",
-      "resumo": "00",
-      "tags": "00",
-      "titulo": "00",
-      "tempo": "~25 min",
-      "estatico": false,
-      "home": {
-        "topText": "00",
-        "excerpt": "00",
-        "tag": "00",
-        "stripe": "00"
-      }
-    },
-    {
       "dataCurta": "Set 2026",
       "cor": "#2874A6",
       "num": "06",
