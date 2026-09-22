@@ -132,25 +132,6 @@
         "excerpt": "Conheça a primeira edição do The MoodBoard!",
         "tag": "Manifesto"
       }
-    },
-    {
-      "dataCurta": "Set 2026",
-      "cor": "#1E8449",
-      "num": "07",
-      "data": "Setembro 2026",
-      "materias": 20,
-      "pdf": "uploads/teste.pdf",
-      "label": "Nova edição",
-      "resumo": "XXXX",
-      "tags": "Moda",
-      "titulo": "XXXXXX",
-      "tempo": "~45 min",
-      "estatico": false,
-      "home": {
-        "topText": "XXX",
-        "excerpt": "XXXX",
-        "tag": "XXX"
-      }
     }
   ]
 }
