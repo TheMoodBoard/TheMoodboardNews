@@ -77,13 +77,67 @@ precisa de um pequeno **proxy OAuth** gratuito. Passo único:
 ### B) Subir o proxy OAuth (Cloudflare Workers, grátis)
 Use o template pronto da comunidade (busque por **"decap-cms cloudflare oauth
 worker"**, ex.: `sterlingwes/decap-proxy` ou `i40west/netlify-cms-oauth`):
-1. Crie conta em cloudflare.com → **Workers & Pages** → **Create Worker**.
-2. Cole o código do template e publique.
-3. Nas **Settings → Variables** do worker, defina:
+1. Crie conta em cloudflare.com → **Workers & Pages** → **Create Worker** →
+   dê o nome `moodboard-oauth` → **Deploy** → **Edit code**.
+2. Apague o código de exemplo e cole **exatamente** este:
+
+```js
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/auth") {
+      const gh = new URL("https://github.com/login/oauth/authorize");
+      gh.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
+      gh.searchParams.set("redirect_uri", `${url.origin}/callback`);
+      gh.searchParams.set("scope", "repo,user");
+      gh.searchParams.set("state", crypto.randomUUID());
+      return Response.redirect(gh.toString(), 302);
+    }
+
+    if (url.pathname === "/callback") {
+      const code = url.searchParams.get("code");
+      const res = await fetch("https://github.com/login/oauth/access_token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          client_id: env.GITHUB_CLIENT_ID,
+          client_secret: env.GITHUB_CLIENT_SECRET,
+          code,
+        }),
+      });
+      const data = await res.json();
+      const status = data.access_token ? "success" : "error";
+      const content = data.access_token
+        ? { token: data.access_token, provider: "github" }
+        : { error: data.error || "no token" };
+      const msg = `authorization:github:${status}:${JSON.stringify(content)}`;
+      const html = `<!doctype html><meta charset="utf-8"><body><script>
+        (function () {
+          function receive(e){
+            if (window.opener) window.opener.postMessage(${JSON.stringify(msg)}, e.origin);
+            window.removeEventListener('message', receive, false);
+          }
+          window.addEventListener('message', receive, false);
+          if (window.opener) window.opener.postMessage('authorizing:github', '*');
+        })();
+      </script>Pode fechar esta janela.</body>`;
+      return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+    }
+
+    return new Response("Moodboard OAuth OK", { status: 200 });
+  },
+};
+```
+
+3. **Deploy**. Depois em **Settings → Variables and Secrets** adicione dois
+   **Secrets**:
    - `GITHUB_CLIENT_ID` = Client ID do passo A
    - `GITHUB_CLIENT_SECRET` = Client Secret do passo A
+   (Deploy de novo após salvar as variáveis.)
 4. A URL do worker será algo como `https://moodboard-oauth.SEU-USER.workers.dev`.
-   Volte ao passo A.2 e confirme o **callback** para `.../callback`.
+   Volte ao passo **A.2** e confirme o **callback** como
+   `https://moodboard-oauth.SEU-USER.workers.dev/callback`.
 
 ### C) Apontar o painel para o proxy
 Em `admin/config.yml`, troque a linha `base_url:` pela URL do seu worker:
