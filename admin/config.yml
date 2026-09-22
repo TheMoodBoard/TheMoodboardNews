@@ -13,6 +13,9 @@ backend:
 # e descomente a linha abaixo (comente-a de novo antes de publicar):
 # local_backend: true
 
+# Logo do The Moodboard na tela de login.
+logo_url: ../themoodboardlogo.png
+
 # Pasta onde os PDFs enviados pelo painel são guardados no repositório.
 media_folder: "uploads"
 public_folder: "uploads"

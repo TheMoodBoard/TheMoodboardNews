@@ -4,7 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
+  <link rel="icon" href="../themoodboardlogo.png" />
   <title>The Moodboard · Painel de Edições</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Archivo:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+  <!-- ─────────────────────────────────────────────────────────────
+       Tema The Moodboard para o painel Decap.
+       O Decap usa classes do Emotion (css-<hash>-<Rótulo>); miramos
+       pelo rótulo estável via [class*="Rótulo"]. Só mexemos em cores,
+       bordas, sombras e fontes — nada de posicionamento.
+  ────────────────────────────────────────────────────────────── -->
+  <style>
+    :root {
+      --mb-orange: #F46F3A;
+      --mb-pink:   #D82E5D;
+      --mb-black:  #1a1a1a;
+      --mb-white:  #ffffff;
+      --mb-light:  #fff8f5;
+    }
+
+    body,
+    #nc-root,
+    #nc-root input,
+    #nc-root textarea,
+    #nc-root button,
+    #nc-root select {
+      font-family: 'Archivo', system-ui, sans-serif !important;
+    }
+
+    /* Fundo geral creme, como o site */
+    body,
+    #nc-root,
+    [class*="AppMainContainer"],
+    [class*="EditorContainer"] {
+      background-color: var(--mb-light) !important;
+    }
+
+    /* ── TELA DE LOGIN ── */
+    [class*="StyledAuthenticationPage"] {
+      background: var(--mb-light) !important;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(216,46,93,0.10), transparent 42%),
+        radial-gradient(circle at 88% 82%, rgba(244,111,58,0.12), transparent 45%) !important;
+    }
+    /* Logo do The Moodboard (via logo_url) */
+    [class*="StyledAuthenticationPage"] img {
+      width: 260px !important;
+      max-width: 70vw !important;
+      height: auto !important;
+      margin-bottom: 8px !important;
+    }
+    /* Esconde o "D" padrão do Decap, se aparecer junto */
+    [class*="DecapLogoIcon"] { display: none !important; }
+
+    /* Botão de login com a cara do site (neo-brutalista) */
+    [class*="LoginButton"] {
+      background: var(--mb-pink) !important;
+      color: var(--mb-white) !important;
+      border: 2.5px solid var(--mb-black) !important;
+      border-radius: 0 !important;
+      box-shadow: 5px 5px 0 var(--mb-black) !important;
+      font-family: 'Archivo Black', sans-serif !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+      padding: 16px 26px !important;
+      transition: transform .12s, box-shadow .12s, background .12s !important;
+    }
+    [class*="LoginButton"]:hover {
+      background: var(--mb-orange) !important;
+      transform: translate(-2px, -2px) !important;
+      box-shadow: 7px 7px 0 var(--mb-black) !important;
+    }
+    /* Ícone do GitHub dentro do botão: sem caixa própria, em branco */
+    [class*="LoginButtonIcon"] {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      margin-right: 10px !important;
+    }
+    [class*="LoginButtonIcon"] svg,
+    [class*="LoginButton"] svg { fill: var(--mb-white) !important; }
+
+    /* ── BARRA SUPERIOR DO APP ── */
+    [class*="AppHeader"] {
+      background: var(--mb-pink) !important;
+      border-bottom: 3px solid var(--mb-black) !important;
+    }
+    [class*="AppHeader"] a,
+    [class*="AppHeader"] button,
+    [class*="AppHeaderNavLink"] {
+      color: var(--mb-white) !important;
+    }
+    /* Aba ativa da navegação */
+    [class*="AppHeaderNavLink"][class*="-active"],
+    [class*="AppHeaderActionsContainer"] a[aria-current="page"] {
+      background: var(--mb-black) !important;
+    }
+
+    /* ── BOTÕES PRIMÁRIOS (Publicar, Adicionar) ── */
+    button[class*="-teal"],
+    button[class*="Primary"],
+    [class*="AddButton"],
+    [class*="PublishButton"],
+    [class*="PublishedButton"],
+    button[class*="Published"] {
+      background: var(--mb-pink) !important;
+      color: var(--mb-white) !important;
+      border: 2px solid var(--mb-black) !important;
+      border-radius: 0 !important;
+      box-shadow: 3px 3px 0 var(--mb-black) !important;
+      font-weight: 700 !important;
+    }
+    button[class*="-teal"]:hover,
+    button[class*="Primary"]:hover,
+    [class*="AddButton"]:hover,
+    [class*="PublishButton"]:hover,
+    button[class*="Published"]:hover {
+      background: var(--mb-orange) !important;
+    }
+
+    /* ── CARDS / LISTAS ── */
+    [class*="ListCard"],
+    [class*="Card-"],
+    [class*="StyledListItem"],
+    [class*="CollectionTop"] {
+      border-radius: 0 !important;
+    }
+    [class*="ListCard"] {
+      border: 2.5px solid var(--mb-black) !important;
+      box-shadow: 4px 4px 0 var(--mb-black) !important;
+    }
+
+    /* Títulos com a fonte de destaque do site */
+    [class*="CollectionTopHeading"],
+    [class*="CardHeading"],
+    [class*="EditorControl"] label,
+    h1, h2 {
+      font-family: 'Archivo Black', sans-serif !important;
+    }
+
+    /* Foco dos campos na cor da marca */
+    #nc-root input:focus,
+    #nc-root textarea:focus {
+      outline-color: var(--mb-pink) !important;
+      border-color: var(--mb-pink) !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Painel de administração (Decap CMS). Acesse em /admin/ -->
