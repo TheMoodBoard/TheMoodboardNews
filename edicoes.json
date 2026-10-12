@@ -132,6 +132,23 @@
         "excerpt": "Conheça a primeira edição do The MoodBoard!",
         "tag": "Manifesto"
       }
+    },
+    {
+      "dataCurta": "Out 2026",
+      "cor": "#1E8449",
+      "num": "07",
+      "data": "Outubro 2026",
+      "materias": 6,
+      "pdf": "uploads/edição-sputnik-1-the-moodboard.pdf",
+      "label": "Nova edição",
+      "resumo": "Nessa edição, veremos como o Sputnik 1 revolucionou o mundo, além de uma matéria sobre a polêmica da Sydney Sweeney e mulheres no esporte, como a internet está mudando a cultura dos adolescentes e outros",
+      "tags": "Moda",
+      "titulo": "Sputnik 1 - O satélite que mudou tudo!",
+      "tempo": "~45 min",
+      "estatico": false,
+      "home": {
+        "topText": "<br>"
+      }
     }
   ]
 }
